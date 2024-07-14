@@ -39,13 +39,13 @@ from concurrent.futures import ProcessPoolExecutor
 import itertools
 import pandas as pd
 from sys import path
-import run_inference_for_search
 from copy import deepcopy
 
 from sys import path
 navcim_dir = os.getenv('NAVCIM_DIR')
 path.append(f"{navcim_dir}/TOPSIS-Python/")
 path.append(f'{navcim_dir}/cross-sim/applications/dnn/inference')
+import run_inference_for_search
 from topsis import Topsis
 
 parser = argparse.ArgumentParser(description='PyTorch CIFAR-X Example')
