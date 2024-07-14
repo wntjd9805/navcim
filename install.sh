@@ -86,6 +86,6 @@ fi
 
 
 # add tvm path to bashrc
-echo "export TVM_HOME=/root/tvm" >> /root/.bashrc
-echo "export PYTHONPATH=/root/tvm/python" >> /root/.bashrc
-echo "export NAVCIM_DIR=$NAVCIM_DIR" >> /root/.bashrc
+echo "export TVM_HOME=$NAVCIM_DIR/tvm" >> $HOME/.bashrc
+echo "export PYTHONPATH=$NAVCIM_DIR/tvm/python" >> $HOME/.bashrc
+echo "export NAVCIM_DIR=$NAVCIM_DIR" >> $HOME/.bashrc
