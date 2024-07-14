@@ -1,0 +1,587 @@
+layer1's readLatency is: 1.57259e+07ns
+layer1's readDynamicEnergy is: 5.37138e+07pJ
+layer1's leakagePower is: 7.48612uW
+layer1's leakageEnergy is: 1.05129e+08pJ
+layer1's buffer readDynamicEnergy is: 693745pJ
+layer1's ic readDynamicEnergy is: 1.58773e+07pJ
+layer1's Tile Area is: 279775um^2
+layer1's H-tree Area is: 6716.1um^2
+layer1's H-tree Latency is : 187222ns
+layer1's H-tree Energy is : 1.39664e+07pJ
+----------- unitLatencyRep is : 3.77283e-07 unitLatencyWire is3.7496e-08
+layer2's readLatency is: 3.00012e+06ns
+layer2's readDynamicEnergy is: 6.83029e+06pJ
+layer2's leakagePower is: 7.48612uW
+layer2's leakageEnergy is: 2.00561e+07pJ
+layer2's buffer readDynamicEnergy is: 97010.5pJ
+layer2's ic readDynamicEnergy is: 3.19765e+06pJ
+layer2's Tile Area is: 279775um^2
+layer2's H-tree Area is: 6716.1um^2
+layer2's H-tree Latency is : 38806.9ns
+layer2's H-tree Energy is : 2.89493e+06pJ
+layer3's readLatency is: 7.81917e+06ns
+layer3's readDynamicEnergy is: 5.52497e+07pJ
+layer3's leakagePower is: 15.3588uW
+layer3's leakageEnergy is: 5.35615e+07pJ
+layer3's buffer readDynamicEnergy is: 719144pJ
+layer3's ic readDynamicEnergy is: 1.53155e+07pJ
+layer3's Tile Area is: 559550um^2
+layer3's H-tree Area is: 13432.2um^2
+layer3's H-tree Latency is : 180410ns
+layer3's H-tree Energy is : 1.34583e+07pJ
+layer4's readLatency is: 2.12899e+06ns
+layer4's readDynamicEnergy is: 2.2863e+07pJ
+layer4's leakagePower is: 30.7176uW
+layer4's leakageEnergy is: 1.45509e+07pJ
+layer4's buffer readDynamicEnergy is: 363292pJ
+layer4's ic readDynamicEnergy is: 8.4482e+06pJ
+layer4's Tile Area is: 1.1191e+06um^2
+layer4's H-tree Area is: 26864.4um^2
+layer4's H-tree Latency is : 97017.3ns
+layer4's H-tree Energy is : 7.23732e+06pJ
+layer5's readLatency is: 2.12899e+06ns
+layer5's readDynamicEnergy is: 2.29173e+07pJ
+layer5's leakagePower is: 30.7176uW
+layer5's leakageEnergy is: 1.45509e+07pJ
+layer5's buffer readDynamicEnergy is: 363292pJ
+layer5's ic readDynamicEnergy is: 8.4482e+06pJ
+layer5's Tile Area is: 1.1191e+06um^2
+layer5's H-tree Area is: 26864.4um^2
+layer5's H-tree Latency is : 97017.3ns
+layer5's H-tree Energy is : 7.23732e+06pJ
+layer6's readLatency is: 7.47908e+06ns
+layer6's readDynamicEnergy is: 2.22758e+07pJ
+layer6's leakagePower is: 8.20768uW
+layer6's leakageEnergy is: 5.48176e+07pJ
+layer6's buffer readDynamicEnergy is: 269827pJ
+layer6's ic readDynamicEnergy is: 7.99807e+06pJ
+layer6's Tile Area is: 279775um^2
+layer6's H-tree Area is: 6716.1um^2
+layer6's H-tree Latency is : 97017.3ns
+layer6's H-tree Energy is : 7.23732e+06pJ
+layer7's readLatency is: 7.81917e+06ns
+layer7's readDynamicEnergy is: 5.5034e+07pJ
+layer7's leakagePower is: 15.3588uW
+layer7's leakageEnergy is: 5.35615e+07pJ
+layer7's buffer readDynamicEnergy is: 719144pJ
+layer7's ic readDynamicEnergy is: 1.53155e+07pJ
+layer7's Tile Area is: 559550um^2
+layer7's H-tree Area is: 13432.2um^2
+layer7's H-tree Latency is : 180410ns
+layer7's H-tree Energy is : 1.34583e+07pJ
+layer8's readLatency is: 2.12899e+06ns
+layer8's readDynamicEnergy is: 2.29139e+07pJ
+layer8's leakagePower is: 30.7176uW
+layer8's leakageEnergy is: 1.45509e+07pJ
+layer8's buffer readDynamicEnergy is: 363292pJ
+layer8's ic readDynamicEnergy is: 8.4482e+06pJ
+layer8's Tile Area is: 1.1191e+06um^2
+layer8's H-tree Area is: 26864.4um^2
+layer8's H-tree Latency is : 97017.3ns
+layer8's H-tree Energy is : 7.23732e+06pJ
+layer9's readLatency is: 7.47908e+06ns
+layer9's readDynamicEnergy is: 2.22196e+07pJ
+layer9's leakagePower is: 8.20768uW
+layer9's leakageEnergy is: 5.48176e+07pJ
+layer9's buffer readDynamicEnergy is: 269827pJ
+layer9's ic readDynamicEnergy is: 7.99807e+06pJ
+layer9's Tile Area is: 279775um^2
+layer9's H-tree Area is: 6716.1um^2
+layer9's H-tree Latency is : 97017.3ns
+layer9's H-tree Energy is : 7.23732e+06pJ
+layer10's readLatency is: 7.81917e+06ns
+layer10's readDynamicEnergy is: 5.50894e+07pJ
+layer10's leakagePower is: 15.3588uW
+layer10's leakageEnergy is: 5.35615e+07pJ
+layer10's buffer readDynamicEnergy is: 719144pJ
+layer10's ic readDynamicEnergy is: 1.53155e+07pJ
+layer10's Tile Area is: 559550um^2
+layer10's H-tree Area is: 13432.2um^2
+layer10's H-tree Latency is : 180410ns
+layer10's H-tree Energy is : 1.34583e+07pJ
+layer11's readLatency is: 2.12899e+06ns
+layer11's readDynamicEnergy is: 2.27571e+07pJ
+layer11's leakagePower is: 30.7176uW
+layer11's leakageEnergy is: 1.45509e+07pJ
+layer11's buffer readDynamicEnergy is: 363292pJ
+layer11's ic readDynamicEnergy is: 8.4482e+06pJ
+layer11's Tile Area is: 1.1191e+06um^2
+layer11's H-tree Area is: 26864.4um^2
+layer11's H-tree Latency is : 97017.3ns
+layer11's H-tree Energy is : 7.23732e+06pJ
+layer12's readLatency is: 4.97113e+06ns
+layer12's readDynamicEnergy is: 3.8678e+07pJ
+layer12's leakagePower is: 16.4154uW
+layer12's leakageEnergy is: 3.63949e+07pJ
+layer12's buffer readDynamicEnergy is: 506654pJ
+layer12's ic readDynamicEnergy is: 1.02063e+07pJ
+layer12's Tile Area is: 559550um^2
+layer12's H-tree Area is: 13432.2um^2
+layer12's H-tree Latency is : 116421ns
+layer12's H-tree Energy is : 8.68478e+06pJ
+layer13's readLatency is: 1.52896e+06ns
+layer13's readDynamicEnergy is: 4.81436e+07pJ
+layer13's leakagePower is: 50.4058uW
+layer13's leakageEnergy is: 1.14061e+07pJ
+layer13's buffer readDynamicEnergy is: 632963pJ
+layer13's ic readDynamicEnergy is: 8.50658e+06pJ
+layer13's Tile Area is: 1.67865e+06um^2
+layer13's H-tree Area is: 40296.6um^2
+layer13's H-tree Latency is : 90205ns
+layer13's H-tree Energy is : 6.72913e+06pJ
+layer14's readLatency is: 613346ns
+layer14's readDynamicEnergy is: 1.88274e+07pJ
+layer14's leakagePower is: 67.2077uW
+layer14's leakageEnergy is: 4.56528e+06pJ
+layer14's buffer readDynamicEnergy is: 266015pJ
+layer14's ic readDynamicEnergy is: 4.52516e+06pJ
+layer14's Tile Area is: 2.2382e+06um^2
+layer14's H-tree Area is: 53728.8um^2
+layer14's H-tree Latency is : 48508.7ns
+layer14's H-tree Energy is : 3.61866e+06pJ
+layer15's readLatency is: 806507ns
+layer15's readDynamicEnergy is: 3.42643e+07pJ
+layer15's leakagePower is: 65.6615uW
+layer15's leakageEnergy is: 5.86493e+06pJ
+layer15's buffer readDynamicEnergy is: 481904pJ
+layer15's ic readDynamicEnergy is: 5.86389e+06pJ
+layer15's Tile Area is: 2.2382e+06um^2
+layer15's H-tree Area is: 53728.8um^2
+layer15's H-tree Latency is : 58210.4ns
+layer15's H-tree Energy is : 4.34239e+06pJ
+layer16's readLatency is: 2.10086e+06ns
+layer16's readDynamicEnergy is: 1.85512e+07pJ
+layer16's leakagePower is: 16.8019uW
+layer16's leakageEnergy is: 1.57431e+07pJ
+layer16's buffer readDynamicEnergy is: 240795pJ
+layer16's ic readDynamicEnergy is: 4.30654e+06pJ
+layer16's Tile Area is: 559550um^2
+layer16's H-tree Area is: 13432.2um^2
+layer16's H-tree Latency is : 48508.7ns
+layer16's H-tree Energy is : 3.61866e+06pJ
+layer17's readLatency is: 1.41781e+06ns
+layer17's readDynamicEnergy is: 4.4679e+07pJ
+layer17's leakagePower is: 50.4058uW
+layer17's leakageEnergy is: 1.05769e+07pJ
+layer17's buffer readDynamicEnergy is: 586945pJ
+layer17's ic readDynamicEnergy is: 7.88844e+06pJ
+layer17's Tile Area is: 1.67865e+06um^2
+layer17's H-tree Area is: 40296.6um^2
+layer17's H-tree Latency is : 83651ns
+layer17's H-tree Energy is : 6.24021e+06pJ
+layer18's readLatency is: 613346ns
+layer18's readDynamicEnergy is: 1.87789e+07pJ
+layer18's leakagePower is: 67.2077uW
+layer18's leakageEnergy is: 4.56528e+06pJ
+layer18's buffer readDynamicEnergy is: 266015pJ
+layer18's ic readDynamicEnergy is: 4.52516e+06pJ
+layer18's Tile Area is: 2.2382e+06um^2
+layer18's H-tree Area is: 53728.8um^2
+layer18's H-tree Latency is : 48508.7ns
+layer18's H-tree Energy is : 3.61866e+06pJ
+layer19's readLatency is: 2.10086e+06ns
+layer19's readDynamicEnergy is: 1.85042e+07pJ
+layer19's leakagePower is: 16.8019uW
+layer19's leakageEnergy is: 1.57431e+07pJ
+layer19's buffer readDynamicEnergy is: 240795pJ
+layer19's ic readDynamicEnergy is: 4.30654e+06pJ
+layer19's Tile Area is: 559550um^2
+layer19's H-tree Area is: 13432.2um^2
+layer19's H-tree Latency is : 48508.7ns
+layer19's H-tree Energy is : 3.61866e+06pJ
+layer20's readLatency is: 1.41781e+06ns
+layer20's readDynamicEnergy is: 4.4676e+07pJ
+layer20's leakagePower is: 50.4058uW
+layer20's leakageEnergy is: 1.05769e+07pJ
+layer20's buffer readDynamicEnergy is: 586945pJ
+layer20's ic readDynamicEnergy is: 7.88844e+06pJ
+layer20's Tile Area is: 1.67865e+06um^2
+layer20's H-tree Area is: 40296.6um^2
+layer20's H-tree Latency is : 83651ns
+layer20's H-tree Energy is : 6.24021e+06pJ
+layer21's readLatency is: 613346ns
+layer21's readDynamicEnergy is: 1.8816e+07pJ
+layer21's leakagePower is: 67.2077uW
+layer21's leakageEnergy is: 4.56528e+06pJ
+layer21's buffer readDynamicEnergy is: 266015pJ
+layer21's ic readDynamicEnergy is: 4.52516e+06pJ
+layer21's Tile Area is: 2.2382e+06um^2
+layer21's H-tree Area is: 53728.8um^2
+layer21's H-tree Latency is : 48508.7ns
+layer21's H-tree Energy is : 3.61866e+06pJ
+layer22's readLatency is: 2.10086e+06ns
+layer22's readDynamicEnergy is: 1.8514e+07pJ
+layer22's leakagePower is: 16.8019uW
+layer22's leakageEnergy is: 1.57431e+07pJ
+layer22's buffer readDynamicEnergy is: 240795pJ
+layer22's ic readDynamicEnergy is: 4.30654e+06pJ
+layer22's Tile Area is: 559550um^2
+layer22's H-tree Area is: 13432.2um^2
+layer22's H-tree Latency is : 48508.7ns
+layer22's H-tree Energy is : 3.61866e+06pJ
+layer23's readLatency is: 1.41781e+06ns
+layer23's readDynamicEnergy is: 4.463e+07pJ
+layer23's leakagePower is: 50.4058uW
+layer23's leakageEnergy is: 1.05769e+07pJ
+layer23's buffer readDynamicEnergy is: 586945pJ
+layer23's ic readDynamicEnergy is: 7.88844e+06pJ
+layer23's Tile Area is: 1.67865e+06um^2
+layer23's H-tree Area is: 40296.6um^2
+layer23's H-tree Latency is : 83651ns
+layer23's H-tree Energy is : 6.24021e+06pJ
+layer24's readLatency is: 613346ns
+layer24's readDynamicEnergy is: 1.88274e+07pJ
+layer24's leakagePower is: 67.2077uW
+layer24's leakageEnergy is: 4.56528e+06pJ
+layer24's buffer readDynamicEnergy is: 266015pJ
+layer24's ic readDynamicEnergy is: 4.52516e+06pJ
+layer24's Tile Area is: 2.2382e+06um^2
+layer24's H-tree Area is: 53728.8um^2
+layer24's H-tree Latency is : 48508.7ns
+layer24's H-tree Energy is : 3.61866e+06pJ
+layer25's readLatency is: 1.48226e+06ns
+layer25's readDynamicEnergy is: 3.41982e+07pJ
+layer25's leakagePower is: 33.6038uW
+layer25's leakageEnergy is: 1.10827e+07pJ
+layer25's buffer readDynamicEnergy is: 465091pJ
+layer25's ic readDynamicEnergy is: 5.71815e+06pJ
+layer25's Tile Area is: 1.1191e+06um^2
+layer25's H-tree Area is: 26864.4um^2
+layer25's H-tree Latency is : 58210.4ns
+layer25's H-tree Energy is : 4.34239e+06pJ
+layer26's readLatency is: 310330ns
+layer26's readDynamicEnergy is: 3.52318e+07pJ
+layer26's leakagePower is: 168.019uW
+layer26's leakageEnergy is: 2.27858e+06pJ
+layer26's buffer readDynamicEnergy is: 490455pJ
+layer26's ic readDynamicEnergy is: 4.56007e+06pJ
+layer26's Tile Area is: 5.5955e+06um^2
+layer26's H-tree Area is: 134322um^2
+layer26's H-tree Latency is : 41837.2ns
+layer26's H-tree Energy is : 3.12098e+06pJ
+layer27's readLatency is: 194340ns
+layer27's readDynamicEnergy is: 1.67872e+07pJ
+layer27's leakagePower is: 131.323uW
+layer27's leakageEnergy is: 1.40048e+06pJ
+layer27's buffer readDynamicEnergy is: 238889pJ
+layer27's ic readDynamicEnergy is: 2.57096e+06pJ
+layer27's Tile Area is: 4.4764e+06um^2
+layer27's H-tree Area is: 107458um^2
+layer27's H-tree Latency is : 24266.1ns
+layer27's H-tree Energy is : 1.81021e+06pJ
+layer28's readLatency is: 270367ns
+layer28's readDynamicEnergy is: 3.20103e+07pJ
+layer28's leakagePower is: 134.415uW
+layer28's leakageEnergy is: 1.99424e+06pJ
+layer28's buffer readDynamicEnergy is: 452716pJ
+layer28's ic readDynamicEnergy is: 3.54695e+06pJ
+layer28's Tile Area is: 4.4764e+06um^2
+layer28's H-tree Area is: 107458um^2
+layer28's H-tree Latency is : 29105.2ns
+layer28's H-tree Energy is : 2.1712e+06pJ
+layer29's readLatency is: 351946ns
+layer29's readDynamicEnergy is: 1.67213e+07pJ
+layer29's leakagePower is: 67.2077uW
+layer29's leakageEnergy is: 2.61962e+06pJ
+layer29's buffer readDynamicEnergy is: 232274pJ
+layer29's ic readDynamicEnergy is: 2.49808e+06pJ
+layer29's Tile Area is: 2.2382e+06um^2
+layer29's H-tree Area is: 53728.8um^2
+layer29's H-tree Latency is : 24266.1ns
+layer29's H-tree Energy is : 1.81021e+06pJ
+layer30's readLatency is: 264434ns
+layer30's readDynamicEnergy is: 3.00041e+07pJ
+layer30's leakagePower is: 168.019uW
+layer30's leakageEnergy is: 1.94159e+06pJ
+layer30's buffer readDynamicEnergy is: 417902pJ
+layer30's ic readDynamicEnergy is: 3.88631e+06pJ
+layer30's Tile Area is: 5.5955e+06um^2
+layer30's H-tree Area is: 134322um^2
+layer30's H-tree Latency is : 35659.1ns
+layer30's H-tree Energy is : 2.66011e+06pJ
+layer31's readLatency is: 194340ns
+layer31's readDynamicEnergy is: 1.68248e+07pJ
+layer31's leakagePower is: 131.323uW
+layer31's leakageEnergy is: 1.40048e+06pJ
+layer31's buffer readDynamicEnergy is: 238889pJ
+layer31's ic readDynamicEnergy is: 2.57096e+06pJ
+layer31's Tile Area is: 4.4764e+06um^2
+layer31's H-tree Area is: 107458um^2
+layer31's H-tree Latency is : 24266.1ns
+layer31's H-tree Energy is : 1.81021e+06pJ
+layer32's readLatency is: 351946ns
+layer32's readDynamicEnergy is: 1.67163e+07pJ
+layer32's leakagePower is: 67.2077uW
+layer32's leakageEnergy is: 2.61962e+06pJ
+layer32's buffer readDynamicEnergy is: 232274pJ
+layer32's ic readDynamicEnergy is: 2.49808e+06pJ
+layer32's Tile Area is: 2.2382e+06um^2
+layer32's H-tree Area is: 53728.8um^2
+layer32's H-tree Latency is : 24266.1ns
+layer32's H-tree Energy is : 1.81021e+06pJ
+layer33's readLatency is: 264434ns
+layer33's readDynamicEnergy is: 3.00659e+07pJ
+layer33's leakagePower is: 168.019uW
+layer33's leakageEnergy is: 1.94159e+06pJ
+layer33's buffer readDynamicEnergy is: 417902pJ
+layer33's ic readDynamicEnergy is: 3.88631e+06pJ
+layer33's Tile Area is: 5.5955e+06um^2
+layer33's H-tree Area is: 134322um^2
+layer33's H-tree Latency is : 35659.1ns
+layer33's H-tree Energy is : 2.66011e+06pJ
+layer34's readLatency is: 194340ns
+layer34's readDynamicEnergy is: 1.68296e+07pJ
+layer34's leakagePower is: 131.323uW
+layer34's leakageEnergy is: 1.40048e+06pJ
+layer34's buffer readDynamicEnergy is: 238889pJ
+layer34's ic readDynamicEnergy is: 2.57096e+06pJ
+layer34's Tile Area is: 4.4764e+06um^2
+layer34's H-tree Area is: 107458um^2
+layer34's H-tree Latency is : 24266.1ns
+layer34's H-tree Energy is : 1.81021e+06pJ
+layer35's readLatency is: 351946ns
+layer35's readDynamicEnergy is: 1.67134e+07pJ
+layer35's leakagePower is: 67.2077uW
+layer35's leakageEnergy is: 2.61962e+06pJ
+layer35's buffer readDynamicEnergy is: 232274pJ
+layer35's ic readDynamicEnergy is: 2.49808e+06pJ
+layer35's Tile Area is: 2.2382e+06um^2
+layer35's H-tree Area is: 53728.8um^2
+layer35's H-tree Latency is : 24266.1ns
+layer35's H-tree Energy is : 1.81021e+06pJ
+layer36's readLatency is: 264434ns
+layer36's readDynamicEnergy is: 3.00768e+07pJ
+layer36's leakagePower is: 168.019uW
+layer36's leakageEnergy is: 1.94159e+06pJ
+layer36's buffer readDynamicEnergy is: 417902pJ
+layer36's ic readDynamicEnergy is: 3.88631e+06pJ
+layer36's Tile Area is: 5.5955e+06um^2
+layer36's H-tree Area is: 134322um^2
+layer36's H-tree Latency is : 35659.1ns
+layer36's H-tree Energy is : 2.66011e+06pJ
+layer37's readLatency is: 194340ns
+layer37's readDynamicEnergy is: 1.68417e+07pJ
+layer37's leakagePower is: 131.323uW
+layer37's leakageEnergy is: 1.40048e+06pJ
+layer37's buffer readDynamicEnergy is: 238889pJ
+layer37's ic readDynamicEnergy is: 2.57096e+06pJ
+layer37's Tile Area is: 4.4764e+06um^2
+layer37's H-tree Area is: 107458um^2
+layer37's H-tree Latency is : 24266.1ns
+layer37's H-tree Energy is : 1.81021e+06pJ
+layer38's readLatency is: 351946ns
+layer38's readDynamicEnergy is: 1.67103e+07pJ
+layer38's leakagePower is: 67.2077uW
+layer38's leakageEnergy is: 2.61962e+06pJ
+layer38's buffer readDynamicEnergy is: 232274pJ
+layer38's ic readDynamicEnergy is: 2.49808e+06pJ
+layer38's Tile Area is: 2.2382e+06um^2
+layer38's H-tree Area is: 53728.8um^2
+layer38's H-tree Latency is : 24266.1ns
+layer38's H-tree Energy is : 1.81021e+06pJ
+layer39's readLatency is: 264434ns
+layer39's readDynamicEnergy is: 2.99845e+07pJ
+layer39's leakagePower is: 168.019uW
+layer39's leakageEnergy is: 1.94159e+06pJ
+layer39's buffer readDynamicEnergy is: 417902pJ
+layer39's ic readDynamicEnergy is: 3.88631e+06pJ
+layer39's Tile Area is: 5.5955e+06um^2
+layer39's H-tree Area is: 134322um^2
+layer39's H-tree Latency is : 35659.1ns
+layer39's H-tree Energy is : 2.66011e+06pJ
+layer40's readLatency is: 194340ns
+layer40's readDynamicEnergy is: 1.68539e+07pJ
+layer40's leakagePower is: 131.323uW
+layer40's leakageEnergy is: 1.40048e+06pJ
+layer40's buffer readDynamicEnergy is: 238889pJ
+layer40's ic readDynamicEnergy is: 2.57096e+06pJ
+layer40's Tile Area is: 4.4764e+06um^2
+layer40's H-tree Area is: 107458um^2
+layer40's H-tree Latency is : 24266.1ns
+layer40's H-tree Energy is : 1.81021e+06pJ
+layer41's readLatency is: 351946ns
+layer41's readDynamicEnergy is: 1.67103e+07pJ
+layer41's leakagePower is: 67.2077uW
+layer41's leakageEnergy is: 2.61962e+06pJ
+layer41's buffer readDynamicEnergy is: 232274pJ
+layer41's ic readDynamicEnergy is: 2.49808e+06pJ
+layer41's Tile Area is: 2.2382e+06um^2
+layer41's H-tree Area is: 53728.8um^2
+layer41's H-tree Latency is : 24266.1ns
+layer41's H-tree Energy is : 1.81021e+06pJ
+layer42's readLatency is: 264434ns
+layer42's readDynamicEnergy is: 3.00763e+07pJ
+layer42's leakagePower is: 168.019uW
+layer42's leakageEnergy is: 1.94159e+06pJ
+layer42's buffer readDynamicEnergy is: 417902pJ
+layer42's ic readDynamicEnergy is: 3.88631e+06pJ
+layer42's Tile Area is: 5.5955e+06um^2
+layer42's H-tree Area is: 134322um^2
+layer42's H-tree Latency is : 35659.1ns
+layer42's H-tree Energy is : 2.66011e+06pJ
+layer43's readLatency is: 194340ns
+layer43's readDynamicEnergy is: 1.68036e+07pJ
+layer43's leakagePower is: 131.323uW
+layer43's leakageEnergy is: 1.40048e+06pJ
+layer43's buffer readDynamicEnergy is: 238889pJ
+layer43's ic readDynamicEnergy is: 2.57096e+06pJ
+layer43's Tile Area is: 4.4764e+06um^2
+layer43's H-tree Area is: 107458um^2
+layer43's H-tree Latency is : 24266.1ns
+layer43's H-tree Energy is : 1.81021e+06pJ
+layer44's readLatency is: 312868ns
+layer44's readDynamicEnergy is: 3.20257e+07pJ
+layer44's leakagePower is: 134.415uW
+layer44's leakageEnergy is: 2.30773e+06pJ
+layer44's buffer readDynamicEnergy is: 456297pJ
+layer44's ic readDynamicEnergy is: 3.54695e+06pJ
+layer44's Tile Area is: 4.4764e+06um^2
+layer44's H-tree Area is: 107458um^2
+layer44's H-tree Latency is : 29105.2ns
+layer44's H-tree Energy is : 2.1712e+06pJ
+layer45's readLatency is: 89985.2ns
+layer45's readDynamicEnergy is: 2.59718e+07pJ
+layer45's leakagePower is: 604.869uW
+layer45's leakageEnergy is: 621400pJ
+layer45's buffer readDynamicEnergy is: 376794pJ
+layer45's ic readDynamicEnergy is: 2.46716e+06pJ
+layer45's Tile Area is: 2.01438e+07um^2
+layer45's H-tree Area is: 483560um^2
+layer45's H-tree Latency is : 17829.6ns
+layer45's H-tree Energy is : 1.33005e+06pJ
+layer46's readLatency is: 68918.7ns
+layer46's readDynamicEnergy is: 1.58172e+07pJ
+layer46's leakagePower is: 268.831uW
+layer46's leakageEnergy is: 499083pJ
+layer46's buffer readDynamicEnergy is: 225327pJ
+layer46's ic readDynamicEnergy is: 1.59386e+06pJ
+layer46's Tile Area is: 8.9528e+06um^2
+layer46's H-tree Area is: 214915um^2
+layer46's H-tree Latency is : 12144.8ns
+layer46's H-tree Energy is : 905979pJ
+layer47's readLatency is: 242757ns
+layer47's readDynamicEnergy is: 3.09689e+07pJ
+layer47's leakagePower is: 537.661uW
+layer47's leakageEnergy is: 1.69269e+06pJ
+layer47's buffer readDynamicEnergy is: 450110pJ
+layer47's ic readDynamicEnergy is: 2.46223e+06pJ
+layer47's Tile Area is: 1.79056e+07um^2
+layer47's H-tree Area is: 429831um^2
+layer47's H-tree Latency is : 14564.3ns
+layer47's H-tree Energy is : 1.08647e+06pJ
+layer48's readLatency is: 89460.5ns
+layer48's readDynamicEnergy is: 1.58265e+07pJ
+layer48's leakagePower is: 268.831uW
+layer48's leakageEnergy is: 647840pJ
+layer48's buffer readDynamicEnergy is: 228013pJ
+layer48's ic readDynamicEnergy is: 1.59386e+06pJ
+layer48's Tile Area is: 8.9528e+06um^2
+layer48's H-tree Area is: 214915um^2
+layer48's H-tree Latency is : 12144.8ns
+layer48's H-tree Energy is : 905979pJ
+layer49's readLatency is: 62487.7ns
+layer49's readDynamicEnergy is: 1.80561e+07pJ
+layer49's leakagePower is: 604.869uW
+layer49's leakageEnergy is: 431515pJ
+layer49's buffer readDynamicEnergy is: 261662pJ
+layer49's ic readDynamicEnergy is: 1.71316e+06pJ
+layer49's Tile Area is: 2.01438e+07um^2
+layer49's H-tree Area is: 483560um^2
+layer49's H-tree Latency is : 12379.7ns
+layer49's H-tree Energy is : 923503pJ
+layer50's readLatency is: 68918.7ns
+layer50's readDynamicEnergy is: 1.58327e+07pJ
+layer50's leakagePower is: 268.831uW
+layer50's leakageEnergy is: 499083pJ
+layer50's buffer readDynamicEnergy is: 225327pJ
+layer50's ic readDynamicEnergy is: 1.59386e+06pJ
+layer50's Tile Area is: 8.9528e+06um^2
+layer50's H-tree Area is: 214915um^2
+layer50's H-tree Latency is : 12144.8ns
+layer50's H-tree Energy is : 905979pJ
+layer51's readLatency is: 89460.5ns
+layer51's readDynamicEnergy is: 1.5792e+07pJ
+layer51's leakagePower is: 268.831uW
+layer51's leakageEnergy is: 647840pJ
+layer51's buffer readDynamicEnergy is: 228013pJ
+layer51's ic readDynamicEnergy is: 1.59386e+06pJ
+layer51's Tile Area is: 8.9528e+06um^2
+layer51's H-tree Area is: 214915um^2
+layer51's H-tree Latency is : 12144.8ns
+layer51's H-tree Energy is : 905979pJ
+layer52's readLatency is: 62487.7ns
+layer52's readDynamicEnergy is: 1.81173e+07pJ
+layer52's leakagePower is: 604.869uW
+layer52's leakageEnergy is: 431515pJ
+layer52's buffer readDynamicEnergy is: 261662pJ
+layer52's ic readDynamicEnergy is: 1.71316e+06pJ
+layer52's Tile Area is: 2.01438e+07um^2
+layer52's H-tree Area is: 483560um^2
+layer52's H-tree Latency is : 12379.7ns
+layer52's H-tree Energy is : 923503pJ
+layer53's readLatency is: 46766.8ns
+layer53's readDynamicEnergy is: 1.52437e+07pJ
+layer53's leakagePower is: 268.831uW
+layer53's leakageEnergy is: 338667pJ
+layer53's buffer readDynamicEnergy is: 224919pJ
+layer53's ic readDynamicEnergy is: 1.05062e+06pJ
+layer53's Tile Area is: 8.9528e+06um^2
+layer53's H-tree Area is: 214915um^2
+layer53's H-tree Latency is : 4862.61ns
+layer53's H-tree Energy is : 362742pJ
+layer54's readLatency is: 3037.36ns
+layer54's readDynamicEnergy is: 625992pJ
+layer54's leakagePower is: 537.661uW
+layer54's leakageEnergy is: 21178.9pJ
+layer54's buffer readDynamicEnergy is: 9183.41pJ
+layer54's ic readDynamicEnergy is: 50779.6pJ
+layer54's Tile Area is: 1.79056e+07um^2
+layer54's H-tree Area is: 429831um^2
+layer54's H-tree Latency is : 305.381ns
+layer54's H-tree Energy is : 22780.9pJ
+------------------------------ Summary --------------------------------
+""
+ChipArea : 2.6421e+08um^2
+GlobalbufferArea : 8.0314e+06um^2
+Tilewidth : 0.000528938m
+Tileheight : 0.000528938m
+minDist0.000108832m
+busWidth1944
+Chip total CIM array : 5.44458e+06um^2
+Total IC Area on chip (Global and Tile/PE local): 9.83163e+06um^2
+Total ADC (or S/As and precharger for SRAM) Area on chip : 4.99476e+07um^2
+"Total Accumulation Circuits (subarray level: adders, shiftAdds; PE/Tile/Global level: accumulation units) on chip : 3.97931e+07um^2"
+"Other Peripheries (e.g. decoders, mux, switchmatrix, buffers, pooling and activation units) : 1.59193e+08um^2"
+""
+Chip clock period is: 1.80699ns
+Chip layer-by-layer readLatency (per image) is: 9.34216e+07ns
+Chip total readDynamicEnergy is: 1.38819e+09pJ
+Chip total leakage Energy is: 6.59299e+08pJ
+Chip total leakage Power is: 7471.88uW
+Chip buffer readLatency is: 7.99666e+07ns
+Chip buffer readDynamicEnergy is: 1.91496e+07pJ
+Chip ic readLatency is: 4.37771e+06ns
+Chip ic readDynamicEnergy is: 2.74625e+08pJ
+""
+************************ Breakdown of Latency and Dynamic Energy *************************
+""
+----------- ADC (or S/As and precharger for SRAM) readLatency is : 3.66041e+06ns
+"----------- Accumulation Circuits (subarray level: adders, shiftAdds; PE/Tile/Global level: accumulation units) readLatency is : 5.10979e+06ns"
+"----------- Other Peripheries (e.g. decoders, mux, switchmatrix, buffers, IC, pooling and activation units) readLatency is : 8.46514e+07ns"
+----------- ADC (or S/As and precharger for SRAM) readDynamicEnergy is : 7.21805e+08pJ
+"----------- Accumulation Circuits (subarray level: adders, shiftAdds; PE/Tile/Global level: accumulation units) readDynamicEnergy is : 1.74021e+08pJ"
+"----------- Other Peripheries (e.g. decoders, mux, switchmatrix, buffers, IC, pooling and activation units) readDynamicEnergy is : 4.92365e+08pJ"
+""
+************************ Breakdown of Latency and Dynamic Energy *************************
+""
+""
+----------------------------- Performance -------------------------------
+Energy Efficiency TOPS/W (Layer-by-Layer Process): 5.13105
+Throughput TOPS (Layer-by-Layer Process): 0.137196
+Throughput FPS (Layer-by-Layer Process): 10.7042
+Compute efficiency TOPS/mm^2 (Layer-by-Layer Process): 0.000519267
+-------------------------------------- Hardware Performance Done --------------------------------------
+""
+------------------------------ Simulation Performance --------------------------------
+Total Run-time of NeuroSim: 5447 seconds
+------------------------------ Simulation Performance --------------------------------
