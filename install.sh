@@ -52,8 +52,8 @@ conda activate navcim
 pip install -r $NAVCIM_DIR/requirments_navcim.txt
 cd $NAVCIM_DIR/cross-sim
 pip install .
-mkdir -p $NAVCIM_DIR/cross-sim/applications/dnn/data/datasets/imagenet/
-cd $NAVCIM_DIR/cross-sim/applications/dnn/data/datasets/imagenet/
+mkdir -p $NAVCIM_DIR/cross-sim/applications/dnn/data/datasets/
+cd $NAVCIM_DIR/cross-sim/applications/dnn/data/datasets/
 # 다운로드할 URL과 파일 이름
 url="https://www.dropbox.com/scl/fi/nswi46sa5hti0dhxhyzuu/imagenet.zip?rlkey=2bue10y0v1nq0gwmfiqzoou2j&st=x6wd7wmn&dl=1"
 output_file="imagenet.zip"
