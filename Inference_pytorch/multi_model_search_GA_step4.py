@@ -72,9 +72,102 @@ parser.add_argument('--search_accuracy',type=int ,default=0, help='search_accura
 parser.add_argument('--population_size',type=int ,default=10, help='Population size in a generation')
 parser.add_argument('--mutation_rate',type=float ,default=0.1, help='rate of mutation')
 parser.add_argument('--generation',type=int ,default=3, help='Total number of generations')
-
+parser.add_argument('--date', default="default")
 args = parser.parse_args()
 random.seed(42)
+
+def print_configuration_message(config, file_path):
+    with open(file_path, 'w') as file:
+        file.write("=======================================\n")
+        file.write(config.task + " sim: " + str(config.ntest) + " images, start: " + str(config.nstart) + "\n")
+        file.write("Mapping: " + str(config.style) + "\n")
+        if config.style == "BALANCED":
+            if config.Nslices == 1:
+                file.write('  Differential cells style: ' + config.balanced_style + "\n")
+            if config.interleaved_posneg:
+                file.write('  Positive/negative weight cells interleaved on column\n')
+            else:
+                file.write('  Subtract current in crossbar: ' + str(config.subtract_current_in_xbar) + "\n")
+        if config.style == "OFFSET":
+            file.write('  Digital offset: ' + str(config.digital_offset) + "\n")
+        if config.weight_bits > 0:
+            file.write('  Weight quantization: ' + str(config.weight_bits) + ' bits\n')
+        else:
+            file.write('  Weight quantization off\n')
+        
+        file.write('  Digital bias: ' + str(config.digital_bias) + "\n")
+        file.write('  Batchnorm fold: ' + str(config.fold_batchnorm) + "\n")
+        if config.bias_bits == "adc":
+            file.write('  Bias quantization: following ADC\n')
+        elif config.bias_bits > 0:
+            file.write('  Bias quantization: ' + str(config.bias_bits) + ' bits\n')
+        else:
+            file.write('  Bias quantization off\n')
+        
+        if config.error_model != 'none' and config.error_model != 'generic':
+            file.write('  Weight error on (' + config.error_model + ')\n')
+        elif config.error_model == 'generic':
+            if config.proportional_error:
+                file.write('  Programming error (proportional): {:.3f}%\n'.format(100*config.alpha_error))
+            else:
+                file.write('  Programming error (uniform): {:.3f}%\n'.format(100*config.alpha_error))
+        else:
+            file.write('  Programming error off\n')
+        if config.noise_model != "none":
+            if config.noise_model == "generic":
+                if config.alpha_noise > 0:
+                    if config.proportional_noise:
+                        file.write('  Read noise (proportional): {:.3f}%\n'.format(100*config.alpha_noise))
+                    else:
+                        file.write('  Read noise (uniform): {:.3f}%\n'.format(100*config.alpha_noise))
+                else:
+                    file.write('  Read noise off\n')
+            else:
+                file.write('  Read noise on (' + config.noise_model + ')\n')
+        else:
+            file.write('  Read noise off\n')
+        if config.adc_bits > 0:
+            if config.ADC_per_ibit:
+                file.write('    ADC per input bit: ON\n')
+            file.write('    ADC range option: ' + config.adc_range_option + "\n")
+            if config.Nslices > 1 and config.adc_range_option == "calibrated":
+                file.write('    Bit sliced ADC range calibration percentile: ' + str(config.pct) + '%\n')
+            file.write('    ADC topology: ' + str(config.adc_type) + "\n")
+        else:
+            file.write('  ADC off\n')
+        if config.dac_bits > 0:
+            if np.min(config.dac_bits_vec) == np.max(config.dac_bits_vec):
+                file.write('  Activation quantization on, ' + str(config.dac_bits) + ' bits\n')
+            else:
+                file.write('  Activation quantization on, variable: ' + str(np.min(config.dac_bits_vec)) + '-' + str(np.max(config.dac_bits_vec)) + ' bits\n')
+            file.write('  Input bit slicing: ' + str(config.input_bitslicing) + "\n")
+            if config.input_bitslicing:
+                file.write('     Input slice size: ' + str(config.input_slice_size) + " bits\n")
+        else:
+            file.write('  Activation quantization off\n')
+        if config.Icol_max > 0:
+            file.write('  Column current clipping on: {:.3f} uA\n'.format(config.Icol_max*1e6))
+        if config.Rp_col > 0:
+            file.write('  Rp column = {:.3e} (ohms)\n'.format(config.Rp_col))
+        if config.Rp_row > 0 and not config.gate_input:
+            file.write('  Rp row = {:.3e} (ohms)\n'.format(config.Rp_row))
+        if config.Rp_col == 0 and (config.Rp_row == 0 or config.gate_input):
+            file.write('  Parasitics off\n')
+        if config.Rp_col > 0 or config.Rp_row > 0:
+            file.write('  Gate input mode: ' + str(config.gate_input) + "\n")
+        if config.infinite_on_off_ratio:
+            file.write('  On off ratio: infinite\n')
+        else:
+            file.write('  On off ratio: {:.1f}\n'.format(config.Rmax/config.Rmin))
+        if config.t_drift > 0 or config.drift_model != "none":
+            file.write('  Weight drift on, ' + str(config.t_drift) + ' days\n')
+            file.write('  Drift model: ' + config.drift_model + "\n")
+        else:
+            file.write('  Weight drift off\n')
+        if config.useGPU:
+            file.write('  GPU: ' + str(config.gpu_num) + "\n")
+        file.write("=======================================\n")
+
 
 def inverse_minmax_latency(value, max, min):
     #max_, min_ 값 찾아야함
@@ -1908,7 +2001,26 @@ for model in model_list:
 
         layerParams, sizes, onnx_model, quantize, adc_ranges_cadidate, index_row_col, dac_ranges, positiveInputsOnly, xy_pars, weight_for_quantized, config =  deepcopy(run_inference_for_search.init(name_model,ntest, ntest_batch,cellbit,adc))
         parameter_crosssim[f"{model},{adc},{cellbit}"] = [layerParams, sizes, onnx_model, quantize, adc_ranges_cadidate, index_row_col, dac_ranges, positiveInputsOnly, xy_pars, weight_for_quantized,config]
-
+    sa_set = []
+    pe_set = 0
+    tile_set = 0
+    adc_set = []
+    cellbit_set = []
+    with open(f"./search_space.txt") as f:
+      lines = f.readlines()
+      a = lines[0].split("=")[1].strip().split(',')
+      for i in a:
+          sa_set.append(int(i))
+      pe_set = int(lines[1].split("=")[1].strip())
+      tile_set = int(lines[2].split("=")[1].strip())
+      a = lines[3].split("=")[1].strip().split(',')
+      for i in a:
+          adc_set.append(int(i))
+      a = lines[4].split("=")[1].strip().split(',')
+      for i in a:
+          cellbit_set.append(int(i))
+    print_configuration_message(config, f"NavCim_log/{args.models}/accuracy_true/Tile_{tile_set}/PE_{pe_set}/SA_{sa_set}/ADC_{adc_set}/CellBit_{cellbit_set}/heterogeneity_{args.heterogeneity}/{args.date}/CrossSim_parameter.txt")
+  
     with open(f'{navcim_dir}/cross-sim/applications/dnn/inference/{name_model}_hessian_list.txt', 'r') as file:
       content = file.read() 
     hessian_list[f"{model}"] = [float(number) for number in content.split(', ')]

@@ -22,6 +22,17 @@ POPULATION=$8
 SEARCH_ACCURACY=$9
 STRATEGY=${10}
 
+
+current_datetime=$(date +"%Yy%mM%dD_%Hh%Mm")
+
+pueue group add process_kill
+output=$(pueue add -g process_kill python $NAVCIM_DIR/process_kill.py)
+pid=$(echo "$output" | grep -oP 'id \K\d+')
+
+python create_log_folder.py --model=$MODELS --date=$current_datetime --search_accuracy=$SEARCH_ACCURACY --heterogeneity=$COMB_HETEROGENEITY --type="folder"
+python create_log_folder.py --model=$MODELS --date=$current_datetime --search_accuracy=$SEARCH_ACCURACY --heterogeneity=$COMB_HETEROGENEITY --type="neurosim"
+python create_log_folder.py --model=$MODELS --date=$current_datetime --search_accuracy=$SEARCH_ACCURACY --heterogeneity=$COMB_HETEROGENEITY --type="booksim"
+
 # Convert comma-separated model names into array
 IFS=',' read -r -a model_array <<< "$MODELS"
 
@@ -60,7 +71,7 @@ IFS=',' read -r -a weights_array_step4 <<< "$clean_weights_step4"
 
 pueue group add $MODELS
 pueue parallel -g $MODELS 1
-pueue add --group $MODELS "python multi_model_search_GA_step4.py --models $MODELS --heterogeneity $COMB_HETEROGENEITY --weights $WEIGHTS --latency ${weights_array_step4[0]} --power ${weights_array_step4[1]} --area ${weights_array_step4[2]} --population_size $POPULATION --generation $GENERATION --search_accuracy=$SEARCH_ACCURACY"
+pueue add --group $MODELS "python multi_model_search_GA_step4.py --models $MODELS --heterogeneity $COMB_HETEROGENEITY --weights $WEIGHTS --latency ${weights_array_step4[0]} --power ${weights_array_step4[1]} --area ${weights_array_step4[2]} --population_size $POPULATION --generation $GENERATION --search_accuracy=$SEARCH_ACCURACY --date=$current_datetime"
 pueue wait --group $MODELS
 
 
@@ -86,11 +97,13 @@ if [ "$STRATEGY" = "constrain" ]; then
     constrain_latency=$(IFS=,; echo "${constrain_latency[*]}")
     constrain_power=$(IFS=,; echo "${constrain_power[*]}")
     constrain_area=$(IFS=,; echo "${constrain_area[*]}")
-    python topsis_multimodel.py --model=$MODELS --heterogeneity=$HETEROGENEITY --latency=${weights_array_step4[0]} --power=${weights_array_step4[1]} --area=${weights_array_step4[2]} --constrain_latency=$constrain_latency --constrain_power=$constrain_power --constrain_area=$constrain_area --population_size $POPULATION --generation $GENERATION --search_accuracy=$SEARCH_ACCURACY
+    python topsis_multimodel.py --model=$MODELS --heterogeneity=$HETEROGENEITY --latency=${weights_array_step4[0]} --power=${weights_array_step4[1]} --area=${weights_array_step4[2]} --constrain_latency=$constrain_latency --constrain_power=$constrain_power --constrain_area=$constrain_area --population_size $POPULATION --generation $GENERATION --search_accuracy=$SEARCH_ACCURACY --date=$current_datetime
 else
     numbers=${STRATEGY#*[}  
     numbers=${numbers%]*}
     IFS=',' read -r -a weight <<< "$numbers"
   
-    python topsis_multimodel.py --model=$MODELS --heterogeneity=$HETEROGENEITY --latency=${weights_array_step4[0]} --power=${weights_array_step4[1]} --area=${weights_array_step4[2]} --weight_latency=${weight[0]} --weight_power=${weight[1]} --weight_area=${weight[2]} --population_size $POPULATION --generation $GENERATION --search_accuracy=$SEARCH_ACCURACY
+    python topsis_multimodel.py --model=$MODELS --heterogeneity=$HETEROGENEITY --latency=${weights_array_step4[0]} --power=${weights_array_step4[1]} --area=${weights_array_step4[2]} --weight_latency=${weight[0]} --weight_power=${weight[1]} --weight_area=${weight[2]} --population_size $POPULATION --generation $GENERATION --search_accuracy=$SEARCH_ACCURACY --date=$current_datetime
 fi
+
+pueue kill $pid
