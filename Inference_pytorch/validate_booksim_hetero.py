@@ -1226,6 +1226,7 @@ total_leakage_list=Manager().dict()
 run_list = Manager().list()
 find_origin_config = Manager().dict()
 total_similarity_list=Manager().dict()
+total_accuracy_list = Manager().dict()
 for i in range(args.heterogeneity):
   globals()['shape{}'.format(i)] = Manager().dict()
   globals()['compute_PPA{}_list'.format(i)] = Manager().dict()
@@ -1412,7 +1413,6 @@ for exec_set in execute_set:
 
 import ast
 
-total_accuracy_list = Manager().dict()
 
 if args.search_accuracy== 1:
   for final in combine_CONFIG:
