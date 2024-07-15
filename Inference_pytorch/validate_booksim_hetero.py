@@ -1246,6 +1246,7 @@ def init(config):
   os.makedirs(f"{path}/ELEMENT/{args.heterogeneity}/{depth}/{config[0][0]}/{config[0][1]}", exist_ok=True)
   shape_list, PPA_list ,chip_width_list[f'{config}'],FPS_list[f'{config}'],iter_list[f'{config}'],level_list[f'{config}'],count_list[f'{config}'],tile_grid_list[f'{config}'],mapping_info_list[f'{config}'],conv_dense_list[f'{config}'],total_latency_list[f'{config}'],total_energy_list[f'{config}'],total_area_list[f'{config}'],total_leakage_list[f'{config}'],all_selected_list[f'{config}'] = initialization(config)
   total_similarity_list[f'{config}'] = 0
+  total_accuracy_list[f'{config}'] = 0
   for i in range(args.heterogeneity):
     globals()['shape{}'.format(i)][f'{config}'] = shape_list[i].copy()
     globals()['compute_PPA{}_list'.format(i)][f'{config}']= PPA_list[i].copy()
