@@ -1247,7 +1247,6 @@ def init(config):
   os.makedirs(f"{path}/ELEMENT/{args.heterogeneity}/{depth}/{config[0][0]}/{config[0][1]}", exist_ok=True)
   shape_list, PPA_list ,chip_width_list[f'{config}'],FPS_list[f'{config}'],iter_list[f'{config}'],level_list[f'{config}'],count_list[f'{config}'],tile_grid_list[f'{config}'],mapping_info_list[f'{config}'],conv_dense_list[f'{config}'],total_latency_list[f'{config}'],total_energy_list[f'{config}'],total_area_list[f'{config}'],total_leakage_list[f'{config}'],all_selected_list[f'{config}'] = initialization(config)
   total_similarity_list[f'{config}'] = 0
-  total_accuracy_list[f'{config}'] = 0
   for i in range(args.heterogeneity):
     globals()['shape{}'.format(i)][f'{config}'] = shape_list[i].copy()
     globals()['compute_PPA{}_list'.format(i)][f'{config}']= PPA_list[i].copy()
@@ -1451,11 +1450,15 @@ if not os.path.isdir(f"{navcim_dir}/Inference_pytorch/search_result/{args.model}
 
 if args.search_accuracy == 1:
   final_latency_f = open(f"./search_result/{args.model}_hetero_validate/final_result_{args.beam_size_m}_{args.beam_size_n}_{args.distribute}_[{args.latency},{args.power},{args.area},{args.accuracy}]_{args.heterogeneity}_{args.search_accuracy_metric}.txt",'w', newline='')
+  final_latency_wr = csv.writer(final_latency_f)
+  for final in combine_CONFIG:
+    final_latency_wr.writerow([final,total_latency_list[final], (total_energy_list[final]/total_latency_list[final])+total_leakage_list[final],total_area_list[final],total_accuracy_list[final]])
 else:
   final_latency_f = open(f"./search_result/{args.model}_hetero_validate/final_result_{args.beam_size_m}_{args.beam_size_n}_{args.distribute}_[{args.latency},{args.power},{args.area}]_{args.heterogeneity}.txt",'w', newline='')
-final_latency_wr = csv.writer(final_latency_f)
-for final in combine_CONFIG:
-  final_latency_wr.writerow([final,total_latency_list[final], (total_energy_list[final]/total_latency_list[final])+total_leakage_list[final],total_area_list[final],total_accuracy_list[final]])
+  final_latency_wr = csv.writer(final_latency_f)
+  for final in combine_CONFIG:
+    final_latency_wr.writerow([final,total_latency_list[final], (total_energy_list[final]/total_latency_list[final])+total_leakage_list[final],total_area_list[final]])
+
 final_latency_f.close()
 
 if args.search_accuracy == 1:

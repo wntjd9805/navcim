@@ -4,9 +4,9 @@
 [submodule "cross-sim"]
 	path = cross-sim
 	url = https://github.com/wntjd9805/navcim_cross-sim.git
-[submodule "TOPSIS-Python"]
-	path = TOPSIS-Python
-	url = https://github.com/Glitchfix/TOPSIS-Python.git
 [submodule "tvm"]
 	path = tvm
 	url = https://github.com/apache/tvm
+[submodule "TOPSIS-Python"]
+	path = TOPSIS-Python
+	url = https://github.com/wntjd9805/navcim_topsis.git
