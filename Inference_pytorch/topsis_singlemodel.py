@@ -52,11 +52,18 @@ if args.search_accuracy == 0:
     cnt = 0
     while not (paretoPoints_list and CONFIG_pareto):
       for l in lines:
-          if float(l.split("\n")[0].split("\"")[2].split(",")[1:][0])<args.constrain_latency + args.constrain_latency*increase*cnt: #latency
-              if float(l.split("\n")[0].split("\"")[2].split(",")[1:][1]) <args.constrain_power + args.constrain_power*increase*cnt:  #power
-                  if float(l.split("\n")[0].split("\"")[2].split(",")[1:][2]) < args.constrain_area + args.constrain_area*increase*cnt: #area
-                      paretoPoints_list.append(l.split("\n")[0].split("\"")[2].split(",")[1:][:3])
-                      CONFIG_pareto.append(l.split("\n")[0].split("\"")[1])
+          if cnt == 0:
+             if float(l.split("\n")[0].split("\"")[2].split(",")[1:][0])<args.constrain_latency: #latency
+                if float(l.split("\n")[0].split("\"")[2].split(",")[1:][1]) <args.constrain_power:  #power
+                    if float(l.split("\n")[0].split("\"")[2].split(",")[1:][2]) < args.constrain_area : #area
+                        paretoPoints_list.append(l.split("\n")[0].split("\"")[2].split(",")[1:])
+                        CONFIG_pareto.append(l.split("\n")[0].split("\"")[1])
+          else:
+            if float(l.split("\n")[0].split("\"")[2].split(",")[1:][0])<args.constrain_latency + args.constrain_latency*increase*cnt: #latency
+                if float(l.split("\n")[0].split("\"")[2].split(",")[1:][1]) <args.constrain_power + args.constrain_power*increase*cnt:  #power
+                    if float(l.split("\n")[0].split("\"")[2].split(",")[1:][2]) < args.constrain_area + args.constrain_area*increase*cnt: #area
+                        paretoPoints_list.append(l.split("\n")[0].split("\"")[2].split(",")[1:])
+                        CONFIG_pareto.append(l.split("\n")[0].split("\"")[1])
       cnt += 1
     
     w = [args.weight_latency,args.weight_power,args.weight_area]
@@ -132,9 +139,6 @@ else:
 
 
 with open(output_file, 'w') as log_file:
-  if cnt > 1 :
-    log_file.write("=" * line_length+"\n")
-    log_file.write("There is no data that satisfies the constraints. So we will find the data that satisfies the constraints with a little more relaxed constraints.\n")
   if len(t.rank_to_best_similarity()) < args.display:
     args.display = len(t.rank_to_best_similarity())
   # Display Setup Information and Parameters
@@ -147,9 +151,12 @@ with open(output_file, 'w') as log_file:
   else:
       log_file.write(f"Accuracy       : False\n")
 
+  log_file.write(f"Constraint (user input) : Latency < {args.constrain_latency}, Power < {args.constrain_power}, Area < {args.constrain_area}\n")
   if cnt > 1:
-      log_file.write(f"Relaxation     : {increase*cnt*100}%\n")
-  log_file.write(f"Constraint     : Latency < {args.constrain_latency}, Power < {args.constrain_power}, Area < {args.constrain_area}\n")
+      log_file.write("There is no data that satisfies the constraints. So we will find the data that satisfies the constraints with a little more relaxed constraints.\n")
+      log_file.write(f"Constraint (applied) : Latency < {args.constrain_latency+ args.constrain_latency*increase*(cnt-1)}, Power < {args.constrain_power+args.constrain_power*increase*(cnt-1)}, Area < {args.constrain_area+args.constrain_area*increase*(cnt-1)}\n")
+      log_file.write(f"Relaxation  : {increase*(cnt-1)*100}%\n")
+  
   # Display Search Space from the search_space.txt
   sa_set = []
   pe_set = 0

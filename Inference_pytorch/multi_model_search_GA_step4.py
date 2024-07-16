@@ -1878,8 +1878,8 @@ inter_connect_AREA={}
 hessian_list = {}
 Similarity_for_accuracy = {}
 parameter_crosssim = {}
-ntest = 100
-ntest_batch = 100
+ntest = 10
+ntest_batch = 10
 
 leakage_POWER={}
 tile_width_meter={}
@@ -2451,7 +2451,7 @@ while cnt <= args.generation:
           idx_cnt+=1
 
     print("Start compute PPA")
-    with ProcessPoolExecutor(max_workers=250) as executor:
+    with ProcessPoolExecutor(max_workers=os.cpu_count()) as executor:
       executor.map(internal_parallel, parallel_list)
       
   else:
@@ -2485,7 +2485,7 @@ while cnt <= args.generation:
       parallel_list.append((idx_cnt, eval(comb_set)))
       idx_cnt+=1
     print("Start compute PPA last", len(parallel_list))
-    with ProcessPoolExecutor(max_workers=120) as executor:
+    with ProcessPoolExecutor(max_workers=os.cpu_count()) as executor:
       executor.map(internal_parallel, parallel_list)
 
     if args.search_accuracy== 1:

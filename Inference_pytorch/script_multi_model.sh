@@ -87,7 +87,7 @@ if [ "$STRATEGY" = "constrain" ]; then
         pueue add --group $model "python profile_booksim_homo.py --model=$model --SA_size_1_ROW=128 --SA_size_1_COL=128 --PE_size_1=4 --TL_size_1=8"
         pueue wait --group $model
 
-        FILE_PATH="//Inference_pytorch/search_result/${model}_homo/final_LATENCY_SA_row:128_SA_col:128_PE:4_TL:8.txt"
+        FILE_PATH="${NAVCIM_DIR}/Inference_pytorch/search_result/${model}_homo/final_LATENCY_SA_row:128_SA_col:128_PE:4_TL:8.txt"
 
         IFS=',' read -r -a line_data < "$FILE_PATH"
     

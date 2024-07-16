@@ -185,9 +185,6 @@ else:
 
 
 with open(output_file, 'w') as log_file:
-  if cnt > 1:
-    log_file.write("=" * line_length+"\n")
-    log_file.write("There is no data that satisfies the constraints. So we will find the data that satisfies the constraints with a little more relaxed constraints.\n")
   if len(t.rank_to_best_similarity()) < args.display:
     args.display = len(t.rank_to_best_similarity())
   # Display Setup Information and Parameters
@@ -202,9 +199,15 @@ with open(output_file, 'w') as log_file:
   else:
       log_file.write(f"Accuracy       : False\n")
 
+  log_file.write(f"Constraint (user input) : Latency < {constrain_latency}, Power < {constrain_power}, Area < {constrain_area}\n")
   if cnt > 1:
-      log_file.write(f"Relaxation     : {increase*cnt*100}%\n")
-  log_file.write(f"Constraint     : Latency < {constrain_latency}, Power < {constrain_power}, Area < {constrain_area}\n")
+      relaxed_constrain_latency = [constrain_latency[i] + constrain_latency[i] * increase * (cnt-1) for i in range(len(constrain_latency))]
+      relaxed_constrain_power = [constrain_power[i] + constrain_power[i] * increase * (cnt-1) for i in range(len(constrain_power))]
+      relaxed_constrain_area = [constrain_area[i] + constrain_area[i] * increase * (cnt-1) for i in range(len(constrain_area))]
+      log_file.write("There is no data that satisfies the constraints. So we will find the data that satisfies the constraints with a little more relaxed constraints.\n")
+      log_file.write(f"Constraint (applied)    : Latency < {relaxed_constrain_latency}, Power < {relaxed_constrain_power}, Area < {relaxed_constrain_area}\n")
+      log_file.write(f"Relaxation     : {increase*(cnt-1)*100}%\n")
+  
   # Display Search Space from the search_space.txt
   sa_set = []
   pe_set = 0
