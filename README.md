@@ -104,7 +104,8 @@ cd /$HOME/navcim/cross-sim
 pip install .
 mkdir -p /$HOME/navcim/cross-sim/applications/dnn/data/datasets/
 cd /$HOME/navcim/cross-sim/applications/dnn/data/datasets/
-wget -O imagenet.zip https://www.dropbox.com/scl/fi/nswi46sa5hti0dhxhyzuu/imagenet.zip?rlkey=2bue10y0v1nq0gwmfiqzoou2j&st=x6wd7wmn&dl=1 
+wget -O imagenet.zip https://www.dropbox.com/scl/fi/nswi46sa5hti0dhxhyzuu/imagenet.zip?rlkey=2bue10y0v1nq0gwmfiqzoou2j&st=x6wd7wmn&dl=1
+unzip imagenet.zip 
 ```
 
 Finally, you need to set the following environment variables and include them to .bashrc for later session.
@@ -147,6 +148,7 @@ bash script_meta_learner.sh {model_name}
 
 If you want to do an accuracy aware search, you need to do this step. Otherwise, you can skip it.
 ```bash
+cd $HOME/navcim/cross-sim/applications/dnn/inference
 bash make_cka.sh {model_name}
 python hessian.py |model={model_name}
 # model_name : **['ResNet50','EfficientNetB0','MobileNetV2','SqueezeNet']**
