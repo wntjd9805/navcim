@@ -189,23 +189,23 @@ with open(output_file, 'w') as log_file:
     args.display = len(t.rank_to_best_similarity())
   # Display Setup Information and Parameters
   log_file.write(" Setup Information and Parameters ".center(line_length, "=")+"\n")
-  log_file.write(f"Model          : {args.models}\n")
-  log_file.write(f"Weight         : Latency = {args.weight_latency}, Power = {args.weight_power}, Area = {args.weight_area}\n")
-  log_file.write(f"Heterogeneity  : {args.heterogeneity}\n")
-  log_file.write(f"GA Generation  : {args.generation}\n")
-  log_file.write(f"GA Population  : {args.population_size}\n")
+  log_file.write(f"Input models       : {args.models}\n")
+  log_file.write(f"Weights            : Latency = {args.weight_latency}, Power = {args.weight_power}, Area = {args.weight_area}\n")
+  log_file.write(f"Tile heterogeneity : {args.heterogeneity}\n")
+  log_file.write(f"GA Generation      : {args.generation}\n")
+  log_file.write(f"GA Population      : {args.population_size}\n")
   if args.search_accuracy == 1:
-      log_file.write(f"Accuracy       : True\n")
+      log_file.write(f"Accuracy           : True\n")
   else:
-      log_file.write(f"Accuracy       : False\n")
+      log_file.write(f"Accuracy           : False\n")
 
-  log_file.write(f"Constraint (user input) : Latency < {constrain_latency}, Power < {constrain_power}, Area < {constrain_area}\n")
+  log_file.write(f"Search constraints (user input) : Latency < {constrain_latency}, Power < {constrain_power}, Area < {constrain_area}\n")
   if cnt > 1:
       relaxed_constrain_latency = [constrain_latency[i] + constrain_latency[i] * increase * (cnt-1) for i in range(len(constrain_latency))]
       relaxed_constrain_power = [constrain_power[i] + constrain_power[i] * increase * (cnt-1) for i in range(len(constrain_power))]
       relaxed_constrain_area = [constrain_area[i] + constrain_area[i] * increase * (cnt-1) for i in range(len(constrain_area))]
       log_file.write("There is no data that satisfies the constraints. So we will find the data that satisfies the constraints with a little more relaxed constraints.\n")
-      log_file.write(f"Constraint (applied)    : Latency < {relaxed_constrain_latency}, Power < {relaxed_constrain_power}, Area < {relaxed_constrain_area}\n")
+      log_file.write(f"Search constraints (applied)    : Latency < {relaxed_constrain_latency}, Power < {relaxed_constrain_power}, Area < {relaxed_constrain_area}\n")
       log_file.write(f"Relaxation     : {increase*(cnt-1)*100}%\n")
   
   # Display Search Space from the search_space.txt
@@ -230,12 +230,12 @@ with open(output_file, 'w') as log_file:
 
       # Display Search Space
       log_file.write(" Search Space ".center(line_length, "=")+'\n')
-      log_file.write(f"SA Width       : {sa_set}\n")
-      log_file.write(f"SA Height      : {sa_set}\n")
-      log_file.write(f"PE Size        : SA Width × n ({pe_range}) ∀n (m % n = 0)\n")
-      log_file.write(f"Tile Size      : SA Width × m ({tile_range})\n")
-      log_file.write(f"ADC Precision  : {adc_bit}\n")
-      log_file.write(f"Cellbit        : {cell_bit}\n")
+      log_file.write(f"SA Width             : {sa_set}\n")
+      log_file.write(f"SA Height            : {sa_set}\n")
+      log_file.write(f"PE Size              : SA Width × n ({pe_range}) ∀n (m % n = 0)\n")
+      log_file.write(f"Tile Size            : SA Width × m ({tile_range})\n")
+      log_file.write(f"ADC Precision (bits) : {adc_bit}\n")
+      log_file.write(f"Cellbit              : {cell_bit}\n")
 
 
   log_file.write(" Search Result Summary ".center(line_length, "=")+'\n')

@@ -143,18 +143,18 @@ with open(output_file, 'w') as log_file:
     args.display = len(t.rank_to_best_similarity())
   # Display Setup Information and Parameters
   log_file.write(" Setup Information and Parameters ".center(line_length, "=")+"\n")
-  log_file.write(f"Model          : {args.model}\n")
-  log_file.write(f"Weight         : Latency = {args.weight_latency}, Power = {args.weight_power}, Area = {args.weight_area}\n")
-  log_file.write(f"Heterogeneity  : {args.heterogeneity}\n")
+  log_file.write(f"Input model        : {args.model}\n")
+  log_file.write(f"Weights            : Latency = {args.weight_latency}, Power = {args.weight_power}, Area = {args.weight_area}\n")
+  log_file.write(f"Tile heterogeneity : {args.heterogeneity}\n")
   if args.search_accuracy == 1:
-      log_file.write(f"Accuracy       : True\n")
+    log_file.write(f"Accuracy           : True\n")
   else:
-      log_file.write(f"Accuracy       : False\n")
+    log_file.write(f"Accuracy           : False\n")
 
-  log_file.write(f"Constraint (user input) : Latency < {args.constrain_latency}, Power < {args.constrain_power}, Area < {args.constrain_area}\n")
+  log_file.write(f"Search constraints  (user input) : Latency < {args.constrain_latency}, Power < {args.constrain_power}, Area < {args.constrain_area}\n")
   if cnt > 1:
       log_file.write("There is no data that satisfies the constraints. So we will find the data that satisfies the constraints with a little more relaxed constraints.\n")
-      log_file.write(f"Constraint (applied) : Latency < {args.constrain_latency+ args.constrain_latency*increase*(cnt-1)}, Power < {args.constrain_power+args.constrain_power*increase*(cnt-1)}, Area < {args.constrain_area+args.constrain_area*increase*(cnt-1)}\n")
+      log_file.write(f"Search constraints  (applied) : Latency < {args.constrain_latency+ args.constrain_latency*increase*(cnt-1)}, Power < {args.constrain_power+args.constrain_power*increase*(cnt-1)}, Area < {args.constrain_area+args.constrain_area*increase*(cnt-1)}\n")
       log_file.write(f"Relaxation  : {increase*(cnt-1)*100}%\n")
   
   # Display Search Space from the search_space.txt
@@ -179,12 +179,12 @@ with open(output_file, 'w') as log_file:
 
       # Display Search Space
       log_file.write(" Search Space ".center(line_length, "=")+"\n")
-      log_file.write(f"SA Width       : {sa_set}\n")
-      log_file.write(f"SA Height      : {sa_set}\n")
-      log_file.write(f"PE Size        : SA Width × n ({pe_range}) ∀n (m % n = 0)\n")
-      log_file.write(f"Tile Size      : SA Width × m ({tile_range})\n")
-      log_file.write(f"ADC Precision  : {adc_bit}\n")
-      log_file.write(f"Cellbit        : {cell_bit}\n")
+      log_file.write(f"SA Width             : {sa_set}\n")
+      log_file.write(f"SA Height            : {sa_set}\n")
+      log_file.write(f"PE Size              : SA Width × n ({pe_range}) ∀n (m % n = 0)\n")
+      log_file.write(f"Tile Size            : SA Width × m ({tile_range})\n")
+      log_file.write(f"ADC Precision (bits) : {adc_bit}\n")
+      log_file.write(f"Cellbit              : {cell_bit}\n")
 
 
   log_file.write(" Search Result Summary ".center(line_length, "=")+"\n")
