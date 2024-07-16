@@ -354,7 +354,7 @@ Heterogeneity  : 2
 GA Generation  : 5
 GA Population  : 10
 Accuracy Aware : True
-Guide          : Constraint
+Constraint (user input) : Latency < [175025615.55, 92044131.69], Power < [123.86, 94.17], Area < [43306397.86, 18791001]
 
 # Search Space
 SA Width       : 64, 128, 256
