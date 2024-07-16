@@ -16,9 +16,9 @@ docker pull nvidia/cuda:11.0.3-devel-ubuntu18.04
 Software pre-requisites for installing from the source should be satisfied for the following repositories:
 
 - [DNN_NeuroSim_V1.3](https://github.com/neurosim/DNN_NeuroSim_V1.3.git)
-- [Booksim2](https://github.com/booksim/booksim2.git)
+- [BookSim2](https://github.com/booksim/booksim2.git)
 - [TVM](https://github.com/apache/tvm)
-- [crosssim](https://github.com/sandialabs/cross-sim)
+- [CrossSim](https://github.com/sandialabs/cross-sim)
 
 We extended NeuroSim 1.3, BookSim2 and CrossSim2 to simulate the ReRAM-based analog CiM architecture with a mesh interconnect. Please the follow this documentation to install all dependencies
 
@@ -104,8 +104,8 @@ cd /$HOME/navcim/cross-sim
 pip install .
 mkdir -p /$HOME/navcim/cross-sim/applications/dnn/data/datasets/
 cd /$HOME/navcim/cross-sim/applications/dnn/data/datasets/
-wget -O imagenet.zip https://www.dropbox.com/scl/fi/nswi46sa5hti0dhxhyzuu/imagenet.zip?rlkey=2bue10y0v1nq0gwmfiqzoou2j&st=x6wd7wmn&dl=1
-unzip imagenet.zip 
+wget -O imagenet.zip https://www.dropbox.com/scl/fi/nswi46sa5hti0dhxhyzuu/imagenet.zip?rlkey=2bue10y0v1nq0gwmfiqzoou2j&st=x6wd7wmn&dl=1 
+unzip imagenet.zip
 ```
 
 Finally, you need to set the following environment variables and include them to .bashrc for later session.
@@ -117,20 +117,29 @@ export NAVCIM_DIR=/$HOME/navcim
 ```
 
 ## Run
+### Pre-search phase
 
-### Preparation before searching
-
-Sets up the search space necessary for the experimental stage. 
-It includes options for whether accuracy is considered in the search (w/_accuracy) or not(w/o_accuracy) 
+Sets up the search space necessary for the search phase. 
+It includes options for whether accuracy is considered in the search (w_accuracy) or not(wo_accuracy) 
 ```bash
 bash script_define_search_space.sh {option}
-option = [w/_accuracy,w/o_accuracy]
+option = [w_accuracy,wo_accuracy]
 
 # For example, If you don't want to consider accuracy, enter
 # bash script_define_search_space.sh w/o_accuracy
 ```
 
-Make weight file and execute Neurosim
+If you want deifne search space yourself, modifying /navcim/Inference_pytorch/search_space.txt. 
+An example is shown below:
+```jsx
+sa_set = 64, 128, 256
+pe_set = 16
+tile_set = 32
+adc_bit = 4, 5, 6
+cell_bit = 1, 2, 4
+```
+
+Make weight file and execute NeuroSim
 ```bash
 bash run_neurosim.sh {model_name}
 # model_name : **['ResNet50','EfficientNetB0','MobileNetV2','SqueezeNet']**
@@ -157,7 +166,8 @@ python hessian.py |model={model_name}
 # python hessian.py |model=MobileNetV2
 ```
 
-### Single Model Search
+### Search phase
+#### Single-model search
 
 Here are the parameters you can set for the Single Model Search:
 
@@ -193,7 +203,7 @@ bash script_single_model.sh {model_name} {latency_weight} {power_weight} {area_w
 # bash script_single_model.sh MobileNetV2 1 1 1 2 0 weight[2,1,1]
 ```
 
-### Multi Model Search
+#### Multi-model search
 
 Here are the parameters you can set for the Multi Model Search:
 
@@ -241,31 +251,30 @@ bash script_multi_model.sh {model_name_set} {weights} {heterogeneity} {combine_h
 
 The structure of the log directories varies depending on whether the search considers accuracy:
 
-- **When Accuracy is Not Considered**: 
-/{model_name}/accuracy_false/ADC_[#]/Cellbit_[#]/Tile_#/PE_#/SA_[#]/heterogeneity_#/TimeStamp,
+- **When Accuracy is Not Considered**: navcim/NavCim_log/{model_name}/accuracy_false/ADC_[#]/Cellbit_[#]/Tile_#/PE_#/SA_[#]/heterogeneity_#/TimeStamp,
 
-e.g. MobileNetV2,SqueezeNet/accuracy_false/ADC_[5]/Cellbit_[2]/Tile_8/PE_2/SA_[128]/heterogeneity_2/2024y07M15D_16h18m
+e.g. navcim/NavCim_log/MobileNetV2,SqueezeNet/accuracy_false/ADC_[5]/Cellbit_[2]/Tile_8/PE_2/SA_[64, 128, 256]/heterogeneity_2/2024y07M15D_16h18m
 
-- **When Accuracy is Considered**: /{model_name}/accuracy_true/Tile_#/PE_#/SA_[#]/ADC_[#]/Cellbit_[#]/heterogeneity_#/TimeStamp
+- **When Accuracy is Considered**: navcim/NavCim_log/{model_name}/accuracy_true/Tile_#/PE_#/SA_[#]/ADC_[#]/Cellbit_[#]/heterogeneity_#/TimeStamp
 
-e.g. MobileNetV2,SqueezeNet/accuracy_true/Tile_8/PE_2/SA_[128]/ADC_[5]/Cellbit_[2]/heterogeneity_2/2024y07M15D_16h18m
+e.g. navcim/NavCim_log/MobileNetV2,SqueezeNet/accuracy_true/Tile_8/PE_2/SA_[64, 128, 256]/ADC_[5]/Cellbit_[2]/heterogeneity_2/2024y07M15D_16h18m
 
 #### Files Created
 
 Within these directories, several files are generated to document the search parameters and results:
 
-- **`Booksim_parameter.txt`**
-- Contains the parameters used in Booksim simulations, detailing the setup for network traffic and behavior modeling.
-- **`Neurosim_parameter.txt`**
-- Records the parameters for Neurosim simulations.
-- **`CrossSim_parameter.txt`** (only generated when accuracy is considered)
+- **`booksim_configuration.txt`**
+- Contains the parameters used in BookSim simulations, detailing the setup for network traffic and behavior modeling.
+- **`neurosim_configuration.txt`**
+- Records the parameters for NeuroSim simulations.
+- **`crosssim_configuration.txt`** (only generated when accuracy is considered)
 - Only accuracy-aware searches provide details about the parameters used in the CrossSim simulation.
 - **`Navcim_search_result.txt`**
 - Stores the final results of the search, including configurations for each model evaluated.
 
 #### Examples of the files.
 
-- **Booksim_parameter.txt**
+- **booksim_configuration.txt**
 ```bash
 #=======================================#
 topology : mesh
@@ -292,7 +301,7 @@ sim_power : 1
 watch_out : -
 #=======================================#
 ```
-- **Neurosim_parameter.txt**
+- **neurosim_configuration.txt**
 ```bash
 #=======================================#
 operationmode : conventionalParallel (Use several multi-bit RRAM as one synapse)
@@ -325,7 +334,7 @@ technode : 22
 
 ```
 
-- **CrossSim_parameter.txt**
+- **crosssim_configuration.txt**
 ```bash
 #=======================================#
 imagenet sim: 100 images, start: 0
@@ -353,9 +362,9 @@ Mapping: BALANCED
 Model          : MobileNetV2, SqueezeNet
 Weight         : Latency = 1, Power = 1, Area = 1
 Heterogeneity  : 2
-GA Generation  : 5
+GA Generation  : 3
 GA Population  : 10
-Accuracy Aware : True
+Accuracy       : True
 Constraint (user input) : Latency < [175025615.55, 92044131.69], Power < [123.86, 94.17], Area < [43306397.86, 18791001]
 
 # Search Space
