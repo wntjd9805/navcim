@@ -20,13 +20,13 @@ Software pre-requisites for installing from the source should be satisfied for t
 - [TVM](https://github.com/apache/tvm)
 - [crosssim](https://github.com/sandialabs/cross-sim)
 
-We extended NeuroSim 1.3 and BookSim2 to simulate the ReRAM-based analog CiM architecture with a mesh interconnect. Please the follow this documentation to install all dependencies
+We extended NeuroSim 1.3, BookSim2 and CrossSim2 to simulate the ReRAM-based analog CiM architecture with a mesh interconnect. Please the follow this documentation to install all dependencies
 
 In Ubuntu 18.04 amd64 system, following commands install package dependencies:
 
 ```jsx
 apt-get update
-apt-get install wget gcc libtinfo-dev zlib1g-dev build-essential cmake libedit-dev libxml2-dev git python3-pip aria2 flex bison curl
+apt-get install wget gcc libtinfo-dev zlib1g-dev build-essential cmake libedit-dev libxml2-dev git python3-pip aria2 flex bison curl unzip
 ```
 
 Install CMake (>= 3.18):
@@ -56,25 +56,26 @@ cargo install pueue
 
 ## Setup
 
-Install and build hetero_neurosim_search repositories from the source. We prepared the installation script (docker/install.sh):
+Install and build navcim repositories from the source. We prepared the installation script (./install.sh):
 
 ```bash
 cd "$HOME"
 git clone --recursive https://github.com/wntjd9805/navcim.git navcim
+cd navcim
+git submodule update --init --recursive
 
-mkdir ./navcim/tvm/build
-cp ./navcim/config.cmake ./navcim/tvm/build
-cd ./navcim/tvm/build
+mkdir $HOME/navcim/tvm/build
+cp $HOME/navcim/config.cmake $HOME/navcim/tvm/build
+cd $HOME/navcim/tvm/build
 cmake ..
 make -j 8
 
-cd "$HOME"
-cd ./navcim/booksim2/src
+cd $HOME/navcim/booksim2/src
 make -j 8
 
-cd "$HOME"
-cd ./navcim/Inference_pytorch/NeuroSIM
+cd $HOME/navcim/Inference_pytorch/NeuroSIM
 make -j 8
+cd "$HOME"
 ```
 
 Next, install Python (== 3.6, 3.10) dependencies.
@@ -84,6 +85,7 @@ Note: you need to use specific version of the library. See requirements_neurosim
 ```jsx
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
+source ~/miniconda3/etc/profile.d/conda.sh
 
 conda create -n neurosim python=3.6.9
 conda activate neurosim
@@ -94,7 +96,7 @@ conda activate navcim
 pip install -r $HOME/navcim/requirments_navcim.txt
 ```
 
-Nex, install cross-sim and download ImageNet
+Nex, install library for cross-sim and download ImageNet
 
 ```jsx
 conda activate navcim
@@ -263,42 +265,45 @@ Within these directories, several files are generated to document the search par
 
 - **Booksim_parameter.txt**
 ```bash
-topology = mesh;
-n = 2;
-routing_function = dor;
-num_vcs     = 8;
-vc_buf_size = 8;
-wait_for_tail_credit = 1;
-vc_allocator = islip;
-sw_allocator = islip;
-alloc_iters  = 1;
-credit_delay   = 2;
-routing_delay  = 0;
-vc_alloc_delay = 1;
-sw_alloc_delay = 1;
-input_speedup     = 2;
-output_speedup    = 1;
-internal_speedup  = 1.0;
-subnets = 1;
-traffic = neurosim;
-sim_type = latency;
-sample_period = 1;
-sim_power = 1;
-watch_out = -;
+#=======================================#
+topology : mesh
+n : 2
+routing_function : dor
+num_vcs : 8
+vc_buf_size : 8
+wait_for_tail_credit : 1
+vc_allocator : islip
+sw_allocator : islip
+alloc_iters : 1
+credit_delay : 2
+routing_delay : 0
+vc_alloc_delay : 1
+sw_alloc_delay : 1
+input_speedup : 2
+output_speedup : 1
+internal_speedup : 1.0
+subnets : 1
+traffic : neurosim
+sim_type : latency
+sample_period : 1
+sim_power : 1
+watch_out : -
+#=======================================#
 ```
 - **Neurosim_parameter.txt**
 ```bash
+#=======================================#
 operationmode : conventionalParallel (Use several multi-bit RRAM as one synapse)
-memcelltype : cell.memCellType = Type::RRAM
-accesstype : cell.accessType = CMOS_access
-transistortype : inputParameter.transistorType = conventional
-deviceroadmap : inputParameter.deviceRoadmap = LSTP
+memcelltype : RRAM
+accesstype : CMOS_access
+transistortype : conventional
+deviceroadmap : LSTP
 globalBufferType : register file
-globalBufferCoreSizeRow = 128
-globalBufferCoreSizeCol = 128
+globalBufferCoreSizeRow : 128
+globalBufferCoreSizeCol : 128
 tileBufferType : register file
-tileBufferCoreSizeRow = 32
-tileBufferCoreSizeCol = 32
+tileBufferCoreSizeRow : 32
+tileBufferCoreSizeCol : 32
 peBufferType : register file
 chipActivation : activation outside Tile
 reLu : reLu
@@ -306,14 +311,16 @@ novelMapping : false
 SARADC : MLSA
 currentMode : MLSA use CSA
 pipeline : layer-by-layer process --> huge leakage energy in HP
-speedUpDegree = 8
+speedUpDegree : 8
 validated : validated by silicon data (wiring area in layout, gate switching activity, post-layout performance drop...)
 synchronous : synchronous, clkFreq will be decided by sensing delay
-algoWeightMax = 1
-algoWeightMin = -1
-clkFreq = 1e9
-temp = 300
-technode = 22
+algoWeightMax : 1
+algoWeightMin : -1
+clkFreq : 1e9
+temp : 300
+technode : 22
+#=======================================#
+
 ```
 
 - **CrossSim_parameter.txt**
