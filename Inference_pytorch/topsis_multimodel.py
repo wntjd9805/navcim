@@ -10,6 +10,7 @@ import math
 import pandas as pd
 import ast
 from tabulate import tabulate
+from datetime import datetime
 
 a=math.inf
 parser = argparse.ArgumentParser()
@@ -21,7 +22,7 @@ parser.add_argument('--beam_size_n',type=int ,default=3,help='beam_size_n')
 parser.add_argument('--latency',type=int ,required=True)
 parser.add_argument('--power',type=int ,required=True)
 parser.add_argument('--area',type=int ,required=True)
-parser.add_argument('--accuracy',type=int )
+parser.add_argument('--accuracy',type=int ,default=1)
 parser.add_argument('--weight_latency',type=int ,default=1)
 parser.add_argument('--weight_power',type=int ,default=1)
 parser.add_argument('--weight_area',type=int ,default=1)
@@ -34,6 +35,7 @@ parser.add_argument('--population_size',type=int ,default=5, help='Population si
 parser.add_argument('--generation',type=int ,default=3, help='Total number of generations')
 parser.add_argument('--display',type=int ,default=20, help='How much to show')
 parser.add_argument('--date', default="default")
+parser.add_argument('--start_time', default=None)
 args = parser.parse_args()
 
 line_length = 60
@@ -234,6 +236,17 @@ with open(output_file, 'w') as log_file:
 
 
   log_file.write(" Search Result Summary ".center(line_length, "=")+'\n')
+
+  if args.start_time == None:
+    start_time = datetime.now()
+  else:
+    start_time = datetime.strptime(args.start_time, "%a %b %d %H:%M:%S %Z %Y")
+
+  log_file.write(f"Exploration started at {start_time}\n")
+  end_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+  log_file.write(f"Exploration ended at {end_time}\n")
+  execution_time = datetime.now() - start_time
+  log_file.write(f"Exploration time: {execution_time}\n")
   df = pd.DataFrame(columns=columns)
   row = 0
   for idx in range(args.display):

@@ -10,6 +10,7 @@ import math
 import pandas as pd
 import ast
 from tabulate import tabulate
+from datetime import datetime
 
 a=math.inf
 parser = argparse.ArgumentParser()
@@ -33,6 +34,8 @@ parser.add_argument('--search_accuracy',type=int ,default=0, help='search_accura
 parser.add_argument('--search_accuracy_metric', type=str, default='cka', choices=['mse', 'cosine', 'ssim', 'cka'], help='metric')
 parser.add_argument('--display',type=int ,default=20, help='How much to show')
 parser.add_argument('--date', default="default")
+parser.add_argument('--start_time', default=None)
+
 
 args = parser.parse_args()
 
@@ -178,6 +181,17 @@ with open(output_file, 'w') as log_file:
 
 
   log_file.write(" Search Result Summary ".center(line_length, "=")+"\n")
+  if args.start_time == None:
+    start_time = datetime.now()
+  else:
+    start_time = datetime.strptime(args.start_time, "%a %b %d %H:%M:%S %Z %Y")
+
+  log_file.write(f"Exploration started at {start_time}\n")
+  end_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+  log_file.write(f"Exploration ended at {end_time}\n")
+  execution_time = datetime.now() - start_time
+  log_file.write(f"Exploration time: {execution_time}\n")
+
   df = pd.DataFrame(columns=columns)
   for idx in range(args.display):
       config_str, sequence_str = CONFIG_pareto[t.rank_to_best_similarity()[idx]-1].split('_')[0], CONFIG_pareto[t.rank_to_best_similarity()[idx]-1].split('_')[1:]

@@ -60,6 +60,7 @@ def parse_cpp_file(file_path):
 
 def save_neurosim_params_to_file(params, output_path):
     with open(output_path, 'w') as file:
+        file.write("=======================================\n")
         for param_name, details in params.items():
             value = details['value']
             
@@ -71,31 +72,31 @@ def save_neurosim_params_to_file(params, output_path):
 
             elif param_name == "memcelltype":
                 if value == "1":
-                    file.write("memcelltype : cell.memCellType = Type::SRAM\n")
+                    file.write("memcelltype : SRAM\n")
                 elif value == "2":
-                    file.write("memcelltype : cell.memCellType = Type::RRAM\n")
+                    file.write("memcelltype : RRAM\n")
                 elif value == "3":
-                    file.write("memcelltype : cell.memCellType = Type::FeFET\n")
+                    file.write("memcelltype : FeFET\n")
 
             elif param_name == "accesstype":
                 if value == "1":
-                    file.write("accesstype : cell.accessType = CMOS_access\n")
+                    file.write("accesstype : CMOS_access\n")
                 elif value == "2":
-                    file.write("accesstype : cell.accessType = BJT_access\n")
+                    file.write("accesstype : BJT_access\n")
                 elif value == "3":
-                    file.write("accesstype : cell.accessType = diode_access\n")
+                    file.write("accesstype : diode_access\n")
                 elif value == "4":
-                    file.write("accesstype : cell.accessType = none_access (Crossbar Array)\n")
+                    file.write("accesstype : none_access (Crossbar Array)\n")
 
             elif param_name == "transistortype":
                 if value == "1":
-                    file.write("transistortype : inputParameter.transistorType = conventional\n")
+                    file.write("transistortype : conventional\n")
 
             elif param_name == "deviceroadmap":
                 if value == "1":
-                    file.write("deviceroadmap : inputParameter.deviceRoadmap = HP\n")
+                    file.write("deviceroadmap : HP\n")
                 elif value == "2":
-                    file.write("deviceroadmap : inputParameter.deviceRoadmap = LSTP\n")
+                    file.write("deviceroadmap : LSTP\n")
             
             elif param_name == "globalBufferType":
                 if value == "false":
@@ -164,16 +165,22 @@ def save_neurosim_params_to_file(params, output_path):
                     file.write("synchronous : synchronous, clkFreq will be decided by sensing delay\n")
             
             elif param_name in ["globalBufferCoreSizeRow", "globalBufferCoreSizeCol", "tileBufferCoreSizeRow", "tileBufferCoreSizeCol", "speedUpDegree", "algoWeightMax", "algoWeightMin", "clkFreq", "temp", "technode"]:
-                file.write(f"{param_name} = {value}\n")
+                file.write(f"{param_name} : {value}\n")
+        file.write("=======================================\n")
 def save_booksim_params_to_file(input_file_path, output_file_path,exclude_keywords):
     with open(input_file_path, 'r') as input_file:
         lines = input_file.readlines()
     
     with open(output_file_path, 'w') as output_file:
+        output_file.write("=======================================\n")
         for line in lines:
             stripped_line = line.lstrip()
-            if not stripped_line.startswith('//') and not any(keyword in stripped_line for keyword in exclude_keywords):
-                output_file.write(stripped_line)
+            if stripped_line and not stripped_line.startswith('//') and not any(keyword in stripped_line for keyword in exclude_keywords):
+                # 세미콜론 제거하고 등호를 콜론으로 변경하고 앞뒤 공백 추가
+                cleaned_line = stripped_line.replace(';', '').replace('=', ' : ')
+                modified_line = ' '.join(cleaned_line.split()) + '\n'
+                output_file.write(modified_line)
+        output_file.write("=======================================\n")
 
 
 def remove_comments(input_file_path, output_file_path):
@@ -200,18 +207,18 @@ if args.type =="folder":
 
 elif args.type =="neurosim":
     if args.search_accuracy == 0:
-        output_file_path = f"./NavCim_log/{args.model}/accuracy_false/ADC_{adc_set}/CellBit_{cellbit_set}/Tile_{tile_set}/PE_{pe_set}/SA_{sa_set}/heterogeneity_{args.heterogeneity}/{args.date}/NeuroSim_parameter.txt"
+        output_file_path = f"./NavCim_log/{args.model}/accuracy_false/ADC_{adc_set}/CellBit_{cellbit_set}/Tile_{tile_set}/PE_{pe_set}/SA_{sa_set}/heterogeneity_{args.heterogeneity}/{args.date}/NeuroSim_configuration.txt"
     else:   
-        output_file_path = f"./NavCim_log/{args.model}/accuracy_true/Tile_{tile_set}/PE_{pe_set}/SA_{sa_set}/ADC_{adc_set}/CellBit_{cellbit_set}/heterogeneity_{args.heterogeneity}/{args.date}/NeuroSim_parameter.txt"
+        output_file_path = f"./NavCim_log/{args.model}/accuracy_true/Tile_{tile_set}/PE_{pe_set}/SA_{sa_set}/ADC_{adc_set}/CellBit_{cellbit_set}/heterogeneity_{args.heterogeneity}/{args.date}/NeuroSim_configuration.txt"
    
     params = parse_cpp_file('./NeuroSIM/Param.cpp')
     save_neurosim_params_to_file(params, output_file_path)
 
 elif args.type == "booksim":
     if args.search_accuracy == 0:
-        output_file_path = f"./NavCim_log/{args.model}/accuracy_false/ADC_{adc_set}/CellBit_{cellbit_set}/Tile_{tile_set}/PE_{pe_set}/SA_{sa_set}/heterogeneity_{args.heterogeneity}/{args.date}/BookSim_parameter.txt"
+        output_file_path = f"./NavCim_log/{args.model}/accuracy_false/ADC_{adc_set}/CellBit_{cellbit_set}/Tile_{tile_set}/PE_{pe_set}/SA_{sa_set}/heterogeneity_{args.heterogeneity}/{args.date}/BookSim_configuration.txt"
     else:   
-        output_file_path = f"./NavCim_log/{args.model}/accuracy_true/Tile_{tile_set}/PE_{pe_set}/SA_{sa_set}/ADC_{adc_set}/CellBit_{cellbit_set}/heterogeneity_{args.heterogeneity}/{args.date}/BookSim_parameter.txt"
+        output_file_path = f"./NavCim_log/{args.model}/accuracy_true/Tile_{tile_set}/PE_{pe_set}/SA_{sa_set}/ADC_{adc_set}/CellBit_{cellbit_set}/heterogeneity_{args.heterogeneity}/{args.date}/BookSim_configuration.txt"
     exclude_keywords = ['k', 'latency_per_flit', 'wire_length_tile', 'injection_rate', 'flit_size']
     save_booksim_params_to_file('../booksim2/src/examples/mesh88_lat', output_file_path, exclude_keywords)
     

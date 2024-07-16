@@ -15,6 +15,7 @@ SEARCH_ACCURACY=$6
 STRATEGY=$7
 
 current_datetime=$(date +"%Yy%mM%dD_%Hh%Mm")
+start_time=$(date)
 
 pueue group add process_kill
 output=$(pueue add -g process_kill python $NAVCIM_DIR/process_kill.py)
@@ -39,13 +40,13 @@ if [ "$STRATEGY" = "constrain" ]; then
 
     IFS=',' read -r -a constrain < "$FILE_PATH"
 
-    python topsis_singlemodel.py --model=$MODEL_NAME --heterogeneity=$HETEROGENEITY --latency=$LATENCY --power=$POWER --area=$AREA --search_accuracy=$SEARCH_ACCURACY --constrain_latency=${constrain[0]} --constrain_power=${constrain[1]} --constrain_area=${constrain[2]} --date=$current_datetime
+    python topsis_singlemodel.py --model=$MODEL_NAME --heterogeneity=$HETEROGENEITY --latency=$LATENCY --power=$POWER --area=$AREA --search_accuracy=$SEARCH_ACCURACY --constrain_latency=${constrain[0]} --constrain_power=${constrain[1]} --constrain_area=${constrain[2]} --date=$current_datetime --start_time="$start_time"
 else
     numbers=${STRATEGY#*[}  
     numbers=${numbers%]*}
     IFS=',' read -r -a weight <<< "$numbers"
   
-    python topsis_singlemodel.py --model=$MODEL_NAME --heterogeneity=$HETEROGENEITY --latency=$LATENCY --power=$POWER --area=$AREA --search_accuracy=$SEARCH_ACCURACY --weight_latency=${weight[0]} --weight_power=${weight[1]} --weight_area=${weight[2]} --date=$current_datetime
+    python topsis_singlemodel.py --model=$MODEL_NAME --heterogeneity=$HETEROGENEITY --latency=$LATENCY --power=$POWER --area=$AREA --search_accuracy=$SEARCH_ACCURACY --weight_latency=${weight[0]} --weight_power=${weight[1]} --weight_area=${weight[2]} --date=$current_datetime --start_time="$start_time"
 fi
 
 pueue kill $pid

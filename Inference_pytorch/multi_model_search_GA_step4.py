@@ -2019,7 +2019,7 @@ for model in model_list:
       a = lines[4].split("=")[1].strip().split(',')
       for i in a:
           cellbit_set.append(int(i))
-    print_configuration_message(config, f"NavCim_log/{args.models}/accuracy_true/Tile_{tile_set}/PE_{pe_set}/SA_{sa_set}/ADC_{adc_set}/CellBit_{cellbit_set}/heterogeneity_{args.heterogeneity}/{args.date}/CrossSim_parameter.txt")
+    print_configuration_message(config, f"NavCim_log/{args.models}/accuracy_true/Tile_{tile_set}/PE_{pe_set}/SA_{sa_set}/ADC_{adc_set}/CellBit_{cellbit_set}/heterogeneity_{args.heterogeneity}/{args.date}/CrossSim_configuration.txt")
   
     with open(f'{navcim_dir}/cross-sim/applications/dnn/inference/{name_model}_hessian_list.txt', 'r') as file:
       content = file.read() 

@@ -24,6 +24,7 @@ STRATEGY=${10}
 
 
 current_datetime=$(date +"%Yy%mM%dD_%Hh%Mm")
+start_time=$(date)
 
 pueue group add process_kill
 output=$(pueue add -g process_kill python $NAVCIM_DIR/process_kill.py)
@@ -97,13 +98,13 @@ if [ "$STRATEGY" = "constrain" ]; then
     constrain_latency=$(IFS=,; echo "${constrain_latency[*]}")
     constrain_power=$(IFS=,; echo "${constrain_power[*]}")
     constrain_area=$(IFS=,; echo "${constrain_area[*]}")
-    python topsis_multimodel.py --model=$MODELS --heterogeneity=$HETEROGENEITY --latency=${weights_array_step4[0]} --power=${weights_array_step4[1]} --area=${weights_array_step4[2]} --constrain_latency=$constrain_latency --constrain_power=$constrain_power --constrain_area=$constrain_area --population_size $POPULATION --generation $GENERATION --search_accuracy=$SEARCH_ACCURACY --date=$current_datetime
+    python topsis_multimodel.py --model=$MODELS --heterogeneity=$HETEROGENEITY --latency=${weights_array_step4[0]} --power=${weights_array_step4[1]} --area=${weights_array_step4[2]} --constrain_latency=$constrain_latency --constrain_power=$constrain_power --constrain_area=$constrain_area --population_size $POPULATION --generation $GENERATION --search_accuracy=$SEARCH_ACCURACY --date=$current_datetime --start_time="$start_time"
 else
     numbers=${STRATEGY#*[}  
     numbers=${numbers%]*}
     IFS=',' read -r -a weight <<< "$numbers"
   
-    python topsis_multimodel.py --model=$MODELS --heterogeneity=$HETEROGENEITY --latency=${weights_array_step4[0]} --power=${weights_array_step4[1]} --area=${weights_array_step4[2]} --weight_latency=${weight[0]} --weight_power=${weight[1]} --weight_area=${weight[2]} --population_size $POPULATION --generation $GENERATION --search_accuracy=$SEARCH_ACCURACY --date=$current_datetime
+    python topsis_multimodel.py --model=$MODELS --heterogeneity=$HETEROGENEITY --latency=${weights_array_step4[0]} --power=${weights_array_step4[1]} --area=${weights_array_step4[2]} --weight_latency=${weight[0]} --weight_power=${weight[1]} --weight_area=${weight[2]} --population_size $POPULATION --generation $GENERATION --search_accuracy=$SEARCH_ACCURACY --date=$current_datetime --start_time="$start_time"
 fi
 
 pueue kill $pid

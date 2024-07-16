@@ -1012,7 +1012,7 @@ if args.search_accuracy == 1:
     a = lines[4].split("=")[1].strip().split(',')
     for i in a:
         cellbit_set.append(int(i))
-  print_configuration_message(config, f"NavCim_log/{args.model}/accuracy_true/Tile_{tile_set}/PE_{pe_set}/SA_{sa_set}/ADC_{adc_set}/CellBit_{cellbit_set}/heterogeneity_{args.heterogeneity}/{args.date}/CrossSim_parameter.txt")
+  print_configuration_message(config, f"NavCim_log/{args.model}/accuracy_true/Tile_{tile_set}/PE_{pe_set}/SA_{sa_set}/ADC_{adc_set}/CellBit_{cellbit_set}/heterogeneity_{args.heterogeneity}/{args.date}/CrossSim_configuration.txt")
   with open(f'{navcim_dir}/cross-sim/applications/dnn/inference/{args.model}_hessian_list.txt', 'r') as file:
     content = file.read()  # 파일의 내용을 읽음
   hessian_list = [float(number) for number in content.split(', ')]
@@ -1201,7 +1201,7 @@ for i in node.keys():
             node[str(j)][1]=str(int(float(node[str(i)][1])))
             has_two=1
           if node[str(i)][2] != '':
-            if has_two == 1 and (args.model != "EfficientB0"):
+            if has_two == 1 and (args.model != "EfficientNetB0"):
               node[str(j)][2]=str(int(float(node[str(i)][2])))
             else:
               node[str(j)][1]=str(int(float(node[str(i)][2])))
@@ -1216,7 +1216,7 @@ for i in node.keys():
             node[str(j)][2]=str(int(float(node[str(i)][1])))
             has_two=1
           if node[str(i)][2] != '':
-            if has_two == 1 and (args.model != "EfficientB0"):
+            if has_two == 1 and (args.model != "EfficientNetB0"):
               node[str(j)][1]=str(int(float(node[str(i)][2])))
             else:
               node[str(j)][2]=str(int(float(node[str(i)][2])))
@@ -1456,16 +1456,16 @@ for exec_set in execute_set:
 
     if args.search_accuracy == 1:
       max_value = int(max(paretoPoints, key=lambda x: x[3])[3])
-
+    min_area = int(min(paretoPoints, key=lambda x: x[2])[2]) 
     # if len(paretoPoints) > args.beam_size_m:
     paretoPoints_list=[]
 
 
     for pareto in paretoPoints:
       if args.search_accuracy == 1:
-        tmp_pareto =[pareto[0],pareto[1],pareto[2],pareto[3]-max_value]
+        tmp_pareto =[pareto[0],pareto[1],pareto[2]-min_area,pareto[3]-max_value]
       else:
-        tmp_pareto =[pareto[0],pareto[1],pareto[2]]
+        tmp_pareto =[pareto[0],pareto[1],pareto[2]-min_area]
       paretoPoints_list.append(tmp_pareto)
       
     if args.search_accuracy == 1:
@@ -1486,9 +1486,9 @@ for exec_set in execute_set:
       # print("beam",overlap_count.values())
       if len(overlap_count) < args.beam_size_m:
         if args.search_accuracy == 1:
-          pal_set = pareto_label[str(paretoPoints_list[t.rank_to_best_similarity()[beam]-1][0])+str(paretoPoints_list[t.rank_to_best_similarity()[beam]-1][1])+str(paretoPoints_list[t.rank_to_best_similarity()[beam]-1][2])+str(paretoPoints_list[t.rank_to_best_similarity()[beam]-1][3]+ max_value)]
+          pal_set = pareto_label[str(paretoPoints_list[t.rank_to_best_similarity()[beam]-1][0])+str(paretoPoints_list[t.rank_to_best_similarity()[beam]-1][1])+str(paretoPoints_list[t.rank_to_best_similarity()[beam]-1][2] +min_area )+str(paretoPoints_list[t.rank_to_best_similarity()[beam]-1][3]+ max_value)]
         else:
-          pal_set = pareto_label[str(paretoPoints_list[t.rank_to_best_similarity()[beam]-1][0])+str(paretoPoints_list[t.rank_to_best_similarity()[beam]-1][1])+str(paretoPoints_list[t.rank_to_best_similarity()[beam]-1][2])]
+          pal_set = pareto_label[str(paretoPoints_list[t.rank_to_best_similarity()[beam]-1][0])+str(paretoPoints_list[t.rank_to_best_similarity()[beam]-1][1])+str(paretoPoints_list[t.rank_to_best_similarity()[beam]-1][2]+min_area)]
         # print("pal.split()[0]",pal.split("_")[0])
         for pal in pal_set:
           # print(pal)
