@@ -1436,20 +1436,20 @@ for exec_set in execute_set:
     pareto_label={}
     if args.search_accuracy == 1:
       for i,e in enumerate(point):
-        if str(e[0])+str(e[1])+str(e[2])+str(e[3]) in pareto_label.keys():
-          pareto_label[str(e[0])+str(e[1])+str(e[2])+str(e[3])].append(labels[i])
+        if f"{e[0]:.6f}{e[1]:.6f}{e[2]:.6f}{e[3]:.6f}" in pareto_label.keys():
+          pareto_label[f"{e[0]:.6f}{e[1]:.6f}{e[2]:.6f}{e[3]:.6f}"].append(labels[i])
           # print(pareto_label[str(e[0])+str(e[1])+str(e[2])+str(e[3])])
           # raise ValueError("same pareto")
         else:
-          pareto_label[str(e[0])+str(e[1])+str(e[2])+str(e[3])]= [labels[i]]
+          pareto_label[f"{e[0]:.6f}{e[1]:.6f}{e[2]:.6f}{e[3]:.6f}"]= [labels[i]]
     else:
       for i,e in enumerate(point):
-        if str(e[0])+str(e[1])+str(e[2]) in pareto_label.keys():
-          pareto_label[str(e[0])+str(e[1])+str(e[2])].append(labels[i])
+        if f"{e[0]:.6f}{e[1]:.6f}{e[2]:.6f}" in pareto_label.keys():
+          pareto_label[f"{e[0]:.6f}{e[1]:.6f}{e[2]:.6f}"].append(labels[i])
           # print(pareto_label[str(e[0])+str(e[1])+str(e[2])])
           # raise ValueError("same pareto")
         else:
-          pareto_label[str(e[0])+str(e[1])+str(e[2])]= [labels[i]]
+          pareto_label[f"{e[0]:.6f}{e[1]:.6f}{e[2]:.6f}"]= [labels[i]]
     # paretoPoints = simple_cull_cython(point, args.search_accuracy)
     # paretoPoints = keep_efficient(point)
     paretoPoints = set(tuple(pt) for pt in point)
@@ -1486,9 +1486,9 @@ for exec_set in execute_set:
       # print("beam",overlap_count.values())
       if len(overlap_count) < args.beam_size_m:
         if args.search_accuracy == 1:
-          pal_set = pareto_label[str(paretoPoints_list[t.rank_to_best_similarity()[beam]-1][0])+str(paretoPoints_list[t.rank_to_best_similarity()[beam]-1][1])+str(paretoPoints_list[t.rank_to_best_similarity()[beam]-1][2] +min_area )+str(paretoPoints_list[t.rank_to_best_similarity()[beam]-1][3]+ max_value)]
+          pal_set = pareto_label[f"{paretoPoints_list[t.rank_to_best_similarity()[beam]-1][0]:.6f}{paretoPoints_list[t.rank_to_best_similarity()[beam]-1][1]:.6f}{paretoPoints_list[t.rank_to_best_similarity()[beam]-1][2]+min_area:.6f}{paretoPoints_list[t.rank_to_best_similarity()[beam]-1][3]+max_value:.6f}"]
         else:
-          pal_set = pareto_label[str(paretoPoints_list[t.rank_to_best_similarity()[beam]-1][0])+str(paretoPoints_list[t.rank_to_best_similarity()[beam]-1][1])+str(paretoPoints_list[t.rank_to_best_similarity()[beam]-1][2]+min_area)]
+          pal_set = pareto_label[f"{paretoPoints_list[t.rank_to_best_similarity()[beam]-1][0]:.6f}{paretoPoints_list[t.rank_to_best_similarity()[beam]-1][1]:.6f}{paretoPoints_list[t.rank_to_best_similarity()[beam]-1][2]+min_area:.6f}"]
         # print("pal.split()[0]",pal.split("_")[0])
         for pal in pal_set:
           # print(pal)
