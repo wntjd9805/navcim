@@ -23,7 +23,7 @@ content=$(cat "$FILE")
 
 # Modify content based on the mode
 case "$MODE" in
-    w/o_accuracy)
+    wo_accuracy)
         # Update the values for main1
         content=$(cat <<EOF
 sa_set = 64, 128, 256
@@ -34,7 +34,7 @@ cell_bit = 2
 EOF
 )
         ;;
-    w/_accuracy)
+    w_accuracy)
         # Update the values for main3
         content=$(cat <<EOF
 sa_set = 64, 128, 256
