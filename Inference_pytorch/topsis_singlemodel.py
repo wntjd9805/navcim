@@ -158,33 +158,18 @@ with open(output_file, 'w') as log_file:
       log_file.write(f"Relaxation  : {increase*(cnt-1)*100}%\n")
   
   # Display Search Space from the search_space.txt
-  sa_set = []
-  pe_set = 0
-  tile_set = 0
-  adc_set = []
-  cellbit_set = []
 
-  # Read and parse the search space parameters from file
-  if os.path.exists("./search_space.txt"):
-      with open("./search_space.txt") as f:
-          sa_set = f.readline().strip().split('=')[1].strip()
-          pe_set = int(f.readline().strip().split('=')[1].strip())
-          tile_set = int(f.readline().strip().split('=')[1].strip())
-          adc_bit = int(f.readline().strip().split('=')[1].strip())
-          cell_bit = int(f.readline().strip().split('=')[1].strip())
+  pe_range = f"2 ≤ n ≤ {pe_set}"
+  tile_range = f"2 ≤ m ≤ {tile_set}"
 
-      # Calculate PE and Tile ranges based on set values
-      pe_range = f"2 ≤ n ≤ {pe_set}"
-      tile_range = f"2 ≤ m ≤ {tile_set}"
-
-      # Display Search Space
-      log_file.write(" Search Space ".center(line_length, "=")+"\n")
-      log_file.write(f"SA Width             : {sa_set}\n")
-      log_file.write(f"SA Height            : {sa_set}\n")
-      log_file.write(f"PE Size              : SA Width × n ({pe_range}) ∀n (m % n = 0)\n")
-      log_file.write(f"Tile Size            : SA Width × m ({tile_range})\n")
-      log_file.write(f"ADC Precision (bits) : {adc_bit}\n")
-      log_file.write(f"Cellbit              : {cell_bit}\n")
+  # Display Search Space
+  log_file.write(" Search Space ".center(line_length, "=")+"\n")
+  log_file.write(f"SA Width             : {sa_set}\n")
+  log_file.write(f"SA Height            : {sa_set}\n")
+  log_file.write(f"PE Size              : SA Width × n ({pe_range}) ∀n (m % n = 0)\n")
+  log_file.write(f"Tile Size            : SA Width × m ({tile_range})\n")
+  log_file.write(f"ADC Precision (bits) : {adc_set}\n")
+  log_file.write(f"Cellbit              : {cellbit_set}\n")
 
 
   log_file.write(" Search Result Summary ".center(line_length, "=")+"\n")
