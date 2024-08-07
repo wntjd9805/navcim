@@ -117,11 +117,15 @@ export NAVCIM_DIR=/$HOME/navcim
 ```
 
 ## Run
+### Execution path
+All code and scripts needed to run it are located in $HOME/navcim/Inference_pytorch
+
 ### Pre-search phase
 
 Sets up the search space necessary for the search phase. 
 It includes options for whether accuracy is considered in the search (w_accuracy) or not(wo_accuracy) 
 ```bash
+cd $HOME/navcim/Inference_pytorch
 bash script_define_search_space.sh {option}
 option = [w_accuracy,wo_accuracy]
 
@@ -129,7 +133,7 @@ option = [w_accuracy,wo_accuracy]
 # bash script_define_search_space.sh w/o_accuracy
 ```
 
-If you want deifne search space yourself, modifying /navcim/Inference_pytorch/search_space.txt. 
+If you want deifne search space yourself, modifying $HOME/navcim/Inference_pytorch/search_space.txt. 
 An example is shown below:
 ```jsx
 sa_set = 64, 128, 256
@@ -141,6 +145,7 @@ cell_bit = 1, 2, 4
 
 Make weight file and execute NeuroSim
 ```bash
+cd $HOME/navcim/Inference_pytorch
 bash run_neurosim.sh {model_name}
 # model_name : **['ResNet50','EfficientNetB0','MobileNetV2','SqueezeNet']**
 # For example, to run the MobileNetV2 model, enter
@@ -149,6 +154,7 @@ bash run_neurosim.sh {model_name}
 
 Training the Meta Learner
 ```bash
+cd $HOME/navcim/Inference_pytorch
 bash script_meta_learner.sh {model_name}
 # model_name : **['ResNet50','EfficientNetB0','MobileNetV2','SqueezeNet']**
 # For example, If you want to train MobileNetV2's meta-learner, enter
@@ -196,6 +202,7 @@ Here are the parameters you can set for the Single Model Search:
 
 ```bash
 pueued -d #launch pueue to use multiple cores
+cd $HOME/navcim/Inference_pytorch
 bash script_single_model.sh {model_name} {latency_weight} {power_weight} {area_weight} {heterogeneity} {accuracy_aware} {guide_strategy}
 
 # For example
@@ -238,6 +245,7 @@ Here are the parameters you can set for the Multi Model Search:
 
 ```bash
 pueued -d #launch pueue to use multiple cores
+cd $HOME/navcim/Inference_pytorch
 bash script_multi_model.sh {model_name_set} {weights} {heterogeneity} {combine_heterogeneity} {extract_num} {GA_TOPSIS_Weight} {GA_generation} {GA_population} {accuracy_aware} {guide_strategy}
 
 # For example
