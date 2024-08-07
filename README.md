@@ -118,7 +118,7 @@ export NAVCIM_DIR=/$HOME/navcim
 
 ## Run
 ### Execution path
-All code and scripts needed to run it are located in $HOME/navcim/Inference_pytorch
+All the code and scripts needed for execution are located in $HOME/navcim/Inference_pytorch
 
 ### Pre-search phase
 
