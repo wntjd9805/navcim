@@ -98,13 +98,35 @@ if [ "$STRATEGY" = "constrain" ]; then
     constrain_latency=$(IFS=,; echo "${constrain_latency[*]}")
     constrain_power=$(IFS=,; echo "${constrain_power[*]}")
     constrain_area=$(IFS=,; echo "${constrain_area[*]}")
-    python topsis_multimodel.py --model=$MODELS --heterogeneity=$COMB_HETEROGENEITY --latency=${weights_array_step4[0]} --power=${weights_array_step4[1]} --area=${weights_array_step4[2]} --constrain_latency=$constrain_latency --constrain_power=$constrain_power --constrain_area=$constrain_area --population_size $POPULATION --generation $GENERATION --search_accuracy=$SEARCH_ACCURACY --date=$current_datetime --start_time="$start_time"
+    python topsis_multimodel.py --model=$MODELS --heterogeneity=$COMB_HETEROGENEITY --latency=${weights_array_step4[0]} --power=${weights_array_step4[1]} --area=${weights_array_step4[2]} --constrain_latency=$constrain_latency --constrain_power=$constrain_power --constrain_area=$constrain_area --population_size $POPULATION --generation $GENERATION --search_accuracy=$SEARCH_ACCURACY --date=$current_datetime --start_time="$start_time" --baseline_latency=$constrain_latency --baseline_power=$constrain_power --baseline_area=$constrain_area
 else
     numbers=${STRATEGY#*[}  
     numbers=${numbers%]*}
     IFS=',' read -r -a weight <<< "$numbers"
+
+
+    declare -a constrain_latency
+    declare -a constrain_power
+    declare -a constrain_area
+    for i in "${!model_array[@]}"
+    do
+        model="${model_array[$i]}"
+        pueue add --group $model "python profile_booksim_homo.py --model=$model --SA_size_1_ROW=128 --SA_size_1_COL=128 --PE_size_1=4 --TL_size_1=8"
+        pueue wait --group $model
+
+        FILE_PATH="${NAVCIM_DIR}/Inference_pytorch/search_result/${model}_homo/final_LATENCY_SA_row:128_SA_col:128_PE:4_TL:8.txt"
+
+        IFS=',' read -r -a line_data < "$FILE_PATH"
+    
+        constrain_latency+=("${line_data[0]}")
+        constrain_power+=("${line_data[1]}")
+        constrain_area+=("${line_data[2]}")
+    done
+    constrain_latency=$(IFS=,; echo "${constrain_latency[*]}")
+    constrain_power=$(IFS=,; echo "${constrain_power[*]}")
+    constrain_area=$(IFS=,; echo "${constrain_area[*]}")
   
-    python topsis_multimodel.py --model=$MODELS --heterogeneity=$COMB_HETEROGENEITY --latency=${weights_array_step4[0]} --power=${weights_array_step4[1]} --area=${weights_array_step4[2]} --weight_latency=${weight[0]} --weight_power=${weight[1]} --weight_area=${weight[2]} --population_size $POPULATION --generation $GENERATION --search_accuracy=$SEARCH_ACCURACY --date=$current_datetime --start_time="$start_time"
+    python topsis_multimodel.py --model=$MODELS --heterogeneity=$COMB_HETEROGENEITY --latency=${weights_array_step4[0]} --power=${weights_array_step4[1]} --area=${weights_array_step4[2]} --weight_latency=${weight[0]} --weight_power=${weight[1]} --weight_area=${weight[2]} --population_size $POPULATION --generation $GENERATION --search_accuracy=$SEARCH_ACCURACY --date=$current_datetime --start_time="$start_time" --baseline_latency=$constrain_latency --baseline_power=$constrain_power --baseline_area=$constrain_area
 fi
 
 pueue kill $pid

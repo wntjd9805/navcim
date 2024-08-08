@@ -39,14 +39,22 @@ if [ "$STRATEGY" = "constrain" ]; then
     FILE_PATH="${NAVCIM_DIR}/Inference_pytorch/search_result/${MODEL_NAME}_homo/final_LATENCY_SA_row:128_SA_col:128_PE:4_TL:8.txt"
 
     IFS=',' read -r -a constrain < "$FILE_PATH"
+    IFS=',' read -r -a baseline < "$FILE_PATH"
 
-    python topsis_singlemodel.py --model=$MODEL_NAME --heterogeneity=$HETEROGENEITY --latency=$LATENCY --power=$POWER --area=$AREA --search_accuracy=$SEARCH_ACCURACY --constrain_latency=${constrain[0]} --constrain_power=${constrain[1]} --constrain_area=${constrain[2]} --date=$current_datetime --start_time="$start_time"
+    python topsis_singlemodel.py --model=$MODEL_NAME --heterogeneity=$HETEROGENEITY --latency=$LATENCY --power=$POWER --area=$AREA --search_accuracy=$SEARCH_ACCURACY --constrain_latency=${constrain[0]} --constrain_power=${constrain[1]} --constrain_area=${constrain[2]} --date=$current_datetime --start_time="$start_time" --baseline_latency=${baseline[0]} --baseline_power=${baseline[1]} --baseline_area=${baseline[2]}
 else
     numbers=${STRATEGY#*[}  
     numbers=${numbers%]*}
     IFS=',' read -r -a weight <<< "$numbers"
+
+    pueue add --group $MODEL_NAME "python profile_booksim_homo.py --model=$MODEL_NAME --SA_size_1_ROW=128 --SA_size_1_COL=128 --PE_size_1=4 --TL_size_1=8"
+    pueue wait --group $MODEL_NAME
+
+    FILE_PATH="${NAVCIM_DIR}/Inference_pytorch/search_result/${MODEL_NAME}_homo/final_LATENCY_SA_row:128_SA_col:128_PE:4_TL:8.txt"
+
+    IFS=',' read -r -a baseline < "$FILE_PATH"
   
-    python topsis_singlemodel.py --model=$MODEL_NAME --heterogeneity=$HETEROGENEITY --latency=$LATENCY --power=$POWER --area=$AREA --search_accuracy=$SEARCH_ACCURACY --weight_latency=${weight[0]} --weight_power=${weight[1]} --weight_area=${weight[2]} --date=$current_datetime --start_time="$start_time"
+    python topsis_singlemodel.py --model=$MODEL_NAME --heterogeneity=$HETEROGENEITY --latency=$LATENCY --power=$POWER --area=$AREA --search_accuracy=$SEARCH_ACCURACY --weight_latency=${weight[0]} --weight_power=${weight[1]} --weight_area=${weight[2]} --date=$current_datetime --start_time="$start_time"  --baseline_latency=${baseline[0]} --baseline_power=${baseline[1]} --baseline_area=${baseline[2]}
 fi
 
 pueue kill $pid

@@ -30,6 +30,9 @@ parser.add_argument('--weight_accuracy',type=int ,default=1,help='weight_accurac
 parser.add_argument('--constrain_latency',type=float ,default=float('inf'))
 parser.add_argument('--constrain_power',type=float ,default=float('inf'))
 parser.add_argument('--constrain_area',type=float ,default=float('inf'))
+parser.add_argument('--baseline_latency',type=float ,default=None)
+parser.add_argument('--baseline_power',type=float ,default=None)
+parser.add_argument('--baseline_area',type=float ,default=None)
 parser.add_argument('--search_accuracy',type=int ,default=0, help='search_accuracy')
 parser.add_argument('--search_accuracy_metric', type=str, default='cka', choices=['mse', 'cosine', 'ssim', 'cka'], help='metric')
 parser.add_argument('--display',type=int ,default=20, help='How much to show')
@@ -105,9 +108,9 @@ else:
 
 
 if args.search_accuracy == 0:
-  columns = ['Tile1', 'Tile2', 'ADC Precision', 'Cellbit', 'Latency (ns)', 'Power (mW)', 'Area (um^2)']
+  columns = ['Tile1', 'Tile2', 'ADC Precision', 'Cellbit', 'Latency (ns)', 'Power (mW)', 'Area (um^2)', 'Normalized Latency', 'Normalized Power', 'Normalized Area']
 else:
-  columns = ['Tile1', 'Tile2', 'ADC Precision', 'Cellbit', 'Latency (ns)', 'Power (mW)', 'Area (um^2)', 'Accuracy (%)']
+  columns = ['Tile1', 'Tile2', 'ADC Precision', 'Cellbit', 'Latency (ns)', 'Power (mW)', 'Area (um^2)', 'Normalized Latency', 'Normalized Power', 'Normalized Area', 'Accuracy (%)']
 
 if args.constrain_latency != a and args.constrain_power != a and args.constrain_area != a:
    args.display = len(t.rank_to_best_similarity())
@@ -172,6 +175,9 @@ with open(output_file, 'w') as log_file:
   log_file.write(f"Cellbit              : {cellbit_set}\n")
 
 
+  log_file.write(" Baseline Result ".center(line_length, "=")+"\n")
+  log_file.write(f"Latency : {args.baseline_latency} (ns), Power : {args.baseline_power} (mW), Area : {args.baseline_area} (um^2)\n")
+
   log_file.write(" Search Result Summary ".center(line_length, "=")+"\n")
   if args.start_time == None:
     start_time = datetime.now()
@@ -206,7 +212,10 @@ with open(output_file, 'w') as log_file:
             'Cellbit': [cellbit],
             'Latency (ns)': [latency],
             'Power (mW)': [power],
-            'Area (um^2)': [area]
+            'Area (um^2)': [area],
+            'Normalized Latency' : [f"{latency/args.baseline_latency:.2f}"],
+            'Normalized Power': [f"{power/args.baseline_power:.2f}"],
+            'Normalized Area' : [f"{area/args.baseline_area:.2f}"],
         }, columns=columns)
       else:
         latency = float(paretoPoints_list[t.rank_to_best_similarity()[idx]-1][0])
@@ -226,6 +235,9 @@ with open(output_file, 'w') as log_file:
             'Latency (ns)': [latency],
             'Power (mW)': [power],
             'Area (um^2)': [area],
+            'Normalized Latency' : [f"{latency/args.baseline_latency:.2f}"],
+            'Normalized Power': [f"{power/args.baseline_power:.2f}"],
+            'Normalized Area' : [f"{area/args.baseline_area:.2f}"],
             'Accuracy (%)': [accuracy]
         }, columns=columns)
       

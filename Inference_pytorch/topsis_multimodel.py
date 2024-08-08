@@ -29,6 +29,9 @@ parser.add_argument('--weight_area',type=int ,default=1)
 parser.add_argument('--constrain_latency',type=str ,default=None)
 parser.add_argument('--constrain_power',type=str ,default=None)
 parser.add_argument('--constrain_area',type=str ,default=None)
+parser.add_argument('--baseline_latency',type=str ,default=None)
+parser.add_argument('--baseline_power',type=str ,default=None)
+parser.add_argument('--baseline_area',type=str ,default=None)
 parser.add_argument('--search_accuracy',type=int ,default=0, help='search_accuracy')
 parser.add_argument('--search_accuracy_metric', type=str, default='cka', choices=['mse', 'cosine', 'ssim', 'cka'], help='metric')
 parser.add_argument('--population_size',type=int ,default=5, help='Population size in a generation')
@@ -54,6 +57,17 @@ if args.constrain_power != None:
     constrain_power = [float(item) for item in args.constrain_power.split(',')]
 if args.constrain_area != None:
     constrain_area = [float(item) for item in args.constrain_area.split(',')]
+
+baseline_latency = [float('inf') for model in model_list]
+baseline_power = [float('inf') for model in model_list]
+baseline_area = [float('inf') for model in model_list]
+if args.baseline_latency != None:
+    baseline_latency = [float(item) for item in args.baseline_latency.split(',')]
+if args.baseline_power != None:
+    baseline_power = [float(item) for item in args.baseline_power.split(',')]
+if args.constrain_area != None:
+    baseline_area = [float(item) for item in args.baseline_area.split(',')]
+
 
 
 if args.search_accuracy == 0:
@@ -149,14 +163,14 @@ if args.search_accuracy == 0:
   sign = np.array([False,False,False])
   t = Topsis(topsis_point, w, sign)
   t.calc()
-  columns = ['Model', 'Tile1', 'Tile2', 'ADC Precision', 'Cellbit', 'Latency (ns)', 'Power (mW)', 'Area (um^2)']
+  columns = ['Model', 'Tile1', 'Tile2', 'ADC Precision', 'Cellbit', 'Latency (ns)', 'Power (mW)', 'Area (um^2)', 'Normalized Latency', 'Normalized Power', 'Normalized Area']
 
 else:
   w = [args.weight_latency,args.weight_power,args.weight_area,args.accuracy]
   sign = np.array([False,False,False,True])
   t = Topsis(topsis_point, w, sign)
   t.calc()
-  columns = ['Model', 'Tile1', 'Tile2', 'ADC Precision', 'Cellbit', 'Latency (ns)', 'Power (mW)', 'Area (um^2)', 'Accuracy (%)']
+  columns = ['Model', 'Tile1', 'Tile2', 'ADC Precision', 'Cellbit', 'Latency (ns)', 'Power (mW)', 'Area (um^2)', 'Normalized Latency', 'Normalized Power', 'Normalized Area', 'Accuracy (%)']
 
 sa_set = []
 pe_set = 0
@@ -223,6 +237,11 @@ with open(output_file, 'w') as log_file:
   log_file.write(f"Cellbit              : {cellbit_set}\n")
 
 
+  log_file.write(" Baseline Result ".center(line_length, "=")+"\n")
+  for j,model in enumerate(model_list):
+    log_file.write(f"{model}\n")
+    log_file.write(f"Latency : {baseline_latency[j]} (ns), Power : {baseline_power[j]} (mW), Area : {baseline_area[j]} (um^2)\n")
+
   log_file.write(" Search Result Summary ".center(line_length, "=")+'\n')
 
   if args.start_time == None:
@@ -262,7 +281,10 @@ with open(output_file, 'w') as log_file:
                 'Cellbit': [cellbit],
                 'Latency (ns)': [latency],
                 'Power (mW)': [power],
-                'Area (um^2)': [area]
+                'Area (um^2)': [area],
+                'Normalized Latency' : [f"{latency/baseline_latency[j]:.2f}"],
+                'Normalized Power' : [f"{power/baseline_power[j]:.2f}"],
+                'Normalized Area' : [f"{area/baseline_area[j]:.2f}"]
             }, columns=columns)
           else:
             latency = float(paretoPoints_list[t.rank_to_best_similarity()[idx]-1][j][0])
@@ -283,6 +305,9 @@ with open(output_file, 'w') as log_file:
                 'Latency (ns)': [latency],
                 'Power (mW)': [power],
                 'Area (um^2)': [area],
+                'Normalized Latency' : [f"{latency/baseline_latency[j]:.2f}"],
+                'Normalized Power' : [f"{power/baseline_power[j]:.2f}"],
+                'Normalized Area' : [f"{area/baseline_area[j]:.2f}"],
                 'Accuracy (%)': [accuracy]
             }, columns=columns)
           
