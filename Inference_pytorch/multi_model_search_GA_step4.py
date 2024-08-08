@@ -1878,8 +1878,8 @@ inter_connect_AREA={}
 hessian_list = {}
 Similarity_for_accuracy = {}
 parameter_crosssim = {}
-ntest = 10
-ntest_batch = 10
+ntest = 100
+ntest_batch = 100
 
 leakage_POWER={}
 tile_width_meter={}
