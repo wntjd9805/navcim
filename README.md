@@ -253,6 +253,40 @@ bash script_multi_model.sh {model_name_set} {weights} {heterogeneity} {combine_h
 # bash script_multi_model.sh MobileNetV2,SqueezeNet [1,1,1],[1,1,1] 2 3 20 [1,1,1] 3 10 0 weight[2,1,1]
 ```
 
+### Reproducing Results from the NavCim Paper
+Here are the detailed commands to reproduce the results presented in the NavCim paper using the search phase described above. By substituting the name of the CNN network into the command, you can reproduce all the results described in the NavCim.
+#### Section 6.1 Results
+To reproduce the results from Section 6.1 of the paper, execute the following commands:
+```bash
+cd $HOME/navcim/Inference_pytorch
+bash script_define_search_space.sh wo_accuracy
+pueued -d                                        
+bash script_single_model.sh MobileNetV2 1 1 1 2 0 constrain
+```
+#### Section 6.2 Results
+To reproduce the results from Section 6.2 of the paper, execute the following commands:
+```bash
+cd $HOME/navcim/Inference_pytorch
+bash script_define_search_space.sh wo_accuracy
+pueued -d                                                              
+bash script_multi_model.sh MobileNetV2,SqueezeNet [1,1,1],[1,1,1] 2 3 20 [1,1,1] 3 10 0 constrain
+```
+#### Section 6.3.1 Results
+To reproduce the results from Section 6.3.1 of the paper, execute the following commands:
+```bash
+cd $HOME/navcim/Inference_pytorch
+bash script_define_search_space.sh w_accuracy
+pueued -d                                                         
+bash script_single_model.sh MobileNetV2 1 1 1 2 1 constrain
+```
+#### Section 6.3.2 Results
+To reproduce the results from Section 6.3.2 of the paper, execute the following commands:
+```bash
+cd $HOME/navcim/Inference_pytorch
+bash script_define_search_space.sh w_accuracy
+pueued -d                                                               
+bash script_multi_model.sh MobileNetV2,SqueezeNet [1,1,1],[1,1,1] 2 2 20 [1,1,1] 3 10 1 constrain
+```
 ### Outputs and Logs
 
 #### Log Directory Paths
