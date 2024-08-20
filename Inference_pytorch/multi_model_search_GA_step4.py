@@ -2199,29 +2199,29 @@ for model in model_list:
                       break
                   else:
                       has_two=0
-                  if node_tmp[str(i)][1] != '':
-                      node_tmp[str(j)][1]=str(int(float(node_tmp[str(i)][1])))
-                      has_two=1
-                  if node_tmp[str(i)][2] != '':
-                      if has_two == 1 and (model == "ResNet50" or model== "DenseNet40" or model=="RegNet_y"):
-                          node_tmp[str(j)][2]=str(int(float(node_tmp[str(i)][2])))
-                      else:
-                          node_tmp[str(j)][1]=str(int(float(node_tmp[str(i)][2])))
-              
+                      if node_tmp[str(i)][1] != '':
+                          node_tmp[str(j)][1]=str(int(float(node_tmp[str(i)][1])))
+                          has_two=1
+                      if node_tmp[str(i)][2] != '':
+                          if has_two == 1 and (model == "EfficientNetB0"):
+                              node_tmp[str(j)][2]=str(int(float(node_tmp[str(i)][2])))
+                          else:
+                              node_tmp[str(j)][1]=str(int(float(node_tmp[str(i)][2])))
+                  
               if node_tmp[str(j)][2]==str(i):
                   if node_tmp[str(j)][0]=="nn.conv2d" or node_tmp[str(j)][0]=="nn.dense" :
                       node_tmp[str(i)][0]="non-MAC"
                       break
                   else:
                       has_two=0
-                  if node_tmp[str(i)][1] != '':
-                      node_tmp[str(j)][2]=str(int(float(node_tmp[str(i)][1])))
-                      has_two=1
-                  if node_tmp[str(i)][2] != '':
-                      if has_two == 1 and (model == "ResNet50" or model== "DenseNet40" or model=="RegNet_y"):
-                          node_tmp[str(j)][1]=str(int(float(node_tmp[str(i)][2])))
-                      else:
-                          node_tmp[str(j)][2]=str(int(float(node_tmp[str(i)][2])))
+                      if node_tmp[str(i)][1] != '':
+                          node_tmp[str(j)][2]=str(int(float(node_tmp[str(i)][1])))
+                          has_two=1
+                      if node_tmp[str(i)][2] != '':
+                          if has_two == 1 and (model == "EfficientNetB0"):
+                              node_tmp[str(j)][1]=str(int(float(node_tmp[str(i)][2])))
+                          else:
+                              node_tmp[str(j)][2]=str(int(float(node_tmp[str(i)][2])))
 
   pop_list=[]
   for i in node_tmp.keys():
