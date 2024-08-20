@@ -1610,7 +1610,7 @@ for i in node.keys():
             node[str(j)][1]=str(int(float(node[str(i)][1])))
             has_two=1
           if node[str(i)][2] != '':
-            if has_two == 1 and (args.model != "EfficientB0"):
+            if has_two == 1 and (args.model != "EfficientNetB0"):
               node[str(j)][2]=str(int(float(node[str(i)][2])))
             else:
               node[str(j)][1]=str(int(float(node[str(i)][2])))
@@ -1625,7 +1625,7 @@ for i in node.keys():
             node[str(j)][2]=str(int(float(node[str(i)][1])))
             has_two=1
           if node[str(i)][2] != '':
-            if has_two == 1 and (args.model != "EfficientB0"):
+            if has_two == 1 and (args.model != "EfficientNetB0"):
               node[str(j)][1]=str(int(float(node[str(i)][2])))
             else:
               node[str(j)][2]=str(int(float(node[str(i)][2])))
