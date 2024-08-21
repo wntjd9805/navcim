@@ -2203,7 +2203,7 @@ for model in model_list:
                           node_tmp[str(j)][1]=str(int(float(node_tmp[str(i)][1])))
                           has_two=1
                       if node_tmp[str(i)][2] != '':
-                          if has_two == 1 and (model == "EfficientNetB0"):
+                          if has_two == 1 and (model != "EfficientNetB0"):
                               node_tmp[str(j)][2]=str(int(float(node_tmp[str(i)][2])))
                           else:
                               node_tmp[str(j)][1]=str(int(float(node_tmp[str(i)][2])))
@@ -2218,7 +2218,7 @@ for model in model_list:
                           node_tmp[str(j)][2]=str(int(float(node_tmp[str(i)][1])))
                           has_two=1
                       if node_tmp[str(i)][2] != '':
-                          if has_two == 1 and (model == "EfficientNetB0"):
+                          if has_two == 1 and (model != "EfficientNetB0"):
                               node_tmp[str(j)][1]=str(int(float(node_tmp[str(i)][2])))
                           else:
                               node_tmp[str(j)][2]=str(int(float(node_tmp[str(i)][2])))
