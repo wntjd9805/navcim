@@ -5,12 +5,11 @@ import time
 # 현재 시간
 now = datetime.now()
 
-# 5시간 전 시간
-threshold_time = now - timedelta(hours=2)
-
 
 # 5시간 이상 실행 중이고 CPU 사용률이 50% 이상인 프로세스 찾기
 while True:
+    # 2시간 전 시간
+    threshold_time = now - timedelta(hours=2)
     for proc in psutil.process_iter(['pid', 'create_time', 'cpu_percent', 'status', 'cmdline']):
         try:
             # 프로세스 정보 가져오기
