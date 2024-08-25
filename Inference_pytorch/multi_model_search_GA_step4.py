@@ -1452,8 +1452,8 @@ def make_args_predict(ht,config,config_cluster,tmp_dfg,shape1,compute_PPA1,chip_
 
   chip1_area = (chip1_meter**2)*1e12
   chip1_leakage =0 
-  if f"layer{conv_dense}_ADC:{ADC}_Cellbit:{Cellbit}_SA_row:{NUM1_ROW}_SA_col:{NUM1_COL}_PE:{PE1}_TL:{Tile1}" in leakage_POWER:
-    chip1_leakage = leakage_POWER.get(f"layer{conv_dense}_ADC:{ADC}_Cellbit:{Cellbit}_SA_row:{NUM1_ROW}_SA_col:{NUM1_COL}_PE:{PE1}_TL:{Tile1}")*1e-6
+  if f"{model}_layer{conv_dense}_ADC:{ADC}_Cellbit:{Cellbit}_SA_row:{NUM1_ROW}_SA_col:{NUM1_COL}_PE:{PE1}_TL:{Tile1}" in leakage_POWER:
+    chip1_leakage = leakage_POWER.get(f"{model}_layer{conv_dense}_ADC:{ADC}_Cellbit:{Cellbit}_SA_row:{NUM1_ROW}_SA_col:{NUM1_COL}_PE:{PE1}_TL:{Tile1}")*1e-6
   chip1_booksim_area  = 0
   cluster_booksim_area =0
   chip1_booksim_leakage  = 0
