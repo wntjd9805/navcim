@@ -64,6 +64,9 @@ git clone --recursive https://github.com/wntjd9805/navcim.git navcim
 cd navcim
 git submodule update --init --recursive
 
+cd $HOME/navcim/tvm/3rdparty/dmlc-core
+git checkout a355fbf49da01db456c4368a244c9dbe865eb079
+
 mkdir $HOME/navcim/tvm/build
 cp $HOME/navcim/config.cmake $HOME/navcim/tvm/build
 cd $HOME/navcim/tvm/build
