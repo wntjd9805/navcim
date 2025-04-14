@@ -1,6 +1,6 @@
 # NavCIM
 NavCIM is an end-to-end design automation tool for neuromorphic architectures by integrating heterogeneous tile/PE/SA sizes and ADC/Cellbit. For full details, please see our recent PACT 2024 paper.
-If you use this tool in your research, please cite : {}
+If you use this tool in your research, please cite : https://dl.acm.org/doi/10.1145/3656019.3676946
 ## Pre-requisites
 
 ### System dependencies
